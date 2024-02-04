@@ -18,11 +18,7 @@ export const Trash = () => {
 				}>
 				<div
 					style={{
-						with: 525,
 						height: 200,
-						display: "flex",
-						justifyContent: "center",
-						alignItems: "center",
 					}}
 					className="content">
 					<div className="message">
