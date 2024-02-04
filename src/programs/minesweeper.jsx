@@ -35,12 +35,15 @@ export const Minesweeper = () => {
 					</div>
 					<div className="actions">
 						<button className="button">Cancel</button>
-						<a
+						<button
 							className="button"
-							href="https://github.com/houssaineamzil/Win-98"
+							onClick={() =>
+								(window.location.href =
+									"https://github.com/houssaineamzil/Win-98")
+							}
 							autoFocus>
 							Ok
-						</a>
+						</button>
 					</div>
 				</div>
 			</Window>
