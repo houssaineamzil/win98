@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react"
 import "./style.scss"
 import { Computer } from "./programs/computer"
+import { Error } from "./programs/error"
 import { Trash } from "./programs/trash"
 import { MSN } from "./programs/msn"
 import { Minesweeper } from "./programs/minesweeper"
 import { tabsStore } from "./store"
 import { StartMenu } from "./components/start"
 
-export const Home = () => {
+export const NotFound = () => {
 	const [localTime, setLocalTime] = useState(new Date())
 	const { current } = tabsStore()
 
@@ -26,6 +27,7 @@ export const Home = () => {
 
 	return (
 		<>
+			<Error />
 			<div className="desktop">
 				<div className="programs">
 					<Computer />
