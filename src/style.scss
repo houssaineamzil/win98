@@ -286,6 +286,13 @@ button {
 		justify-content: flex-end;
 
 		.button {
+			border: none;
+			color: inherit;
+			display: block;
+			font: inherit;
+			background: unset;
+			cursor: pointer;
+
 			min-width: 4.5rem;
 			min-height: 1.5rem;
 			background: silver;
@@ -293,6 +300,10 @@ button {
 			box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff,
 				inset -2px -2px grey, inset 2px 2px #dfdfdf;
 
+			&:focus-visible {
+				outline: none;
+			}
+			
 			&:focus {
 				outline-offset: -4px;
 				outline: 1px dotted #000;
