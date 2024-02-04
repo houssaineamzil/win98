@@ -276,6 +276,11 @@ button {
 		gap: 0.5rem;
 		display: flex;
 		max-width: 32.5rem;
+
+		.icon {
+			width: 2rem;
+			height: 2rem;
+		}
 	}
 
 	.actions {

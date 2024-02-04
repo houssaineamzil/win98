@@ -17,11 +17,7 @@ export const Minesweeper = () => {
 						<span className="name">Minesweeper</span>
 					</div>
 				}>
-				<div
-					style={{
-						height: 200,
-					}}
-					className="content">
+				<div className="content">
 					<div className="message">
 						<img
 							className="icon"

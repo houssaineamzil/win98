@@ -16,11 +16,7 @@ export const MSN = () => {
 						<span className="name">MSN</span>
 					</div>
 				}>
-				<div
-					style={{
-						height: 200,
-					}}
-					className="content">
+				<div className="content">
 					<div className="message">
 						<img
 							className="icon"
@@ -34,12 +30,15 @@ export const MSN = () => {
 					</div>
 					<div className="actions">
 						<button className="button">Cancel</button>
-						<a
+						<button
 							className="button"
-							href="https://github.com/houssaineamzil/Win-98"
+							onClick={() =>
+								(window.location.href =
+									"https://github.com/houssaineamzil/Win-98")
+							}
 							autoFocus>
 							Ok
-						</a>
+						</button>
 					</div>
 				</div>
 			</Window>
