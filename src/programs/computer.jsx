@@ -18,7 +18,7 @@ export const Computer = () => {
 				}>
 				<div
 					style={{
-						with: 120,
+						with: 525,
 						height: 200,
 						display: "flex",
 						justifyContent: "center",
