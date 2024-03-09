@@ -1,0 +1,42 @@
+.desktop {
+	display: flex;
+	height: calc(100dvh - 2.5rem);
+}
+
+.desktopIcon {
+	gap: 0.25rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	.iconWrapper {
+		.icon {
+			width: 32px;
+			height: 32px;
+		}
+
+		.selectionEffect {
+			left: 0;
+			top: 0;
+			opacity: 0.5;
+			display: none;
+			position: absolute;
+			background: navy;
+			mask-image: var(--icon-image);
+		}
+	}
+
+	.label {
+		display: flex;
+		color: black;
+		font-size: 14px;
+		overflow: hidden;
+		text-align: center;
+		word-wrap: break-word;
+		justify-content: center;
+		text-overflow: ellipsis;
+		text-shadow: 0 0 #222;
+		overflow-wrap: break-word;
+	}
+}

@@ -1,0 +1,27 @@
+@import "../../variables";
+
+.taskbar {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  gap: 0.25rem;
+  display: flex;
+  color: black;
+  height: 2.5rem;
+  position: fixed;
+  padding: 0.25rem;
+  font-weight: bold;
+  align-items: center;
+
+  background-color: silver;
+  box-shadow: inset 1px 0 white;
+  border-top: 1px solid #f4f4f4;
+  border-bottom: 1px solid #4e4e4e;
+}
+
+.separator {
+  width: 3px;
+  height: 1.625rem;
+  background: grey;
+  border-right: 1.25px solid white;
+}

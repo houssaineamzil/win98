@@ -1,0 +1,67 @@
+@import "../../variables";
+
+.start {
+	gap: 0.25rem;
+	display: flex;
+	min-width: 4.5rem;
+	min-height: 1.375rem;
+	align-items: center;
+	justify-content: center;
+	padding: 0.125rem 0.5rem;
+
+	.icon {
+		width: auto;
+		height: 1.5rem;
+	}
+}
+
+.menu {
+	padding: 2px;
+	background: silver;
+	text-shadow: 0 0 #222;
+	box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px white, inset -2px -2px grey,
+		inset 2px 2px #dfdfdf;
+
+	.item,
+	.subItem {
+		display: flex;
+		min-width: 12rem;
+		padding: 0.5rem;
+		align-items: center;
+		background: silver;
+		justify-content: space-between;
+
+		&:hover {
+			color: white;
+			background: #0000aa;
+			text-shadow: 0 0 white;
+		}
+
+		.container {
+			display: flex;
+			align-items: center;
+		}
+
+		.icon {
+			width: 1.5rem;
+			height: 1.5rem;
+			margin-right: 0.625rem;
+		}
+	}
+
+	.subItem {
+		padding: 3px;
+
+		.icon {
+			width: 1rem;
+			height: 1rem;
+			margin-right: 0.25rem;
+		}
+	}
+
+	.separator {
+		height: 2px;
+		margin-block: 3px 0.25rem;
+		box-shadow: inset 1px 1px gray, inset -1px -1px white;
+	}
+}

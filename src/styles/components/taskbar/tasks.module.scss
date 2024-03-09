@@ -1,0 +1,33 @@
+@import "../../variables";
+
+.tasks {
+	flex: 1;
+	gap: 0.25rem;
+	display: flex;
+	overflow: scroll;
+
+	.task {
+		display: flex;
+		min-width: fit-content;
+		max-width: 12.5rem;
+		min-height: 1.75rem;
+		align-items: center;
+		justify-content: center;
+		padding: 0.125rem 0.5rem;
+		background: silver;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px white,
+			inset -2px -2px grey, inset 2px 2px #dfdfdf;
+
+		&.active,
+		&:active {
+			box-shadow: inset 1px 1px #0a0a0a, inset -1px -1px white,
+				inset 2px 2px grey, inset -2px -2px #dfdfdf;
+		}
+
+		&.active {
+			background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAG0lEQVQYV2M8cODAf3t7ewbG/////z948CADAFuqCj64BtLKAAAAAElFTkSuQmCC);
+		}
+	}
+}
