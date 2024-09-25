@@ -1,0 +1,171 @@
+.window {
+	display: flex;
+	color: black;
+	padding: 2px 3px;
+	background: silver;
+	flex-direction: column;
+	box-shadow:
+		inset -1px -1px #0a0a0a,
+		inset 1px 1px #dfdfdf,
+		inset -2px -2px grey,
+		inset 2px 2px #fff;
+
+	&.active {
+		z-index: 50;
+
+		.titleBar {
+			background: linear-gradient(90deg, navy, #1084d0);
+
+			.icon {
+				filter: none;
+			}
+		}
+	}
+
+	.content {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.titleBar {
+	display: flex;
+	align-items: center;
+	padding: 3px 2px 3px 3px;
+	justify-content: space-between;
+	background: linear-gradient(90deg, grey, #b5b5b5);
+
+	.titleWrapper {
+		gap: 6px;
+		display: flex;
+
+		.icon {
+			width: 16px;
+			height: 16px;
+			filter: grayscale(1);
+		}
+
+		.title {
+			color: #fff;
+			line-height: 16px;
+			margin-right: 24px;
+		}
+	}
+
+	.controls {
+		gap: 2px;
+		display: flex;
+
+		button {
+			width: 16px;
+			height: 16px;
+		}
+	}
+}
+
+.toolbars {
+	padding: 1px;
+	display: flex;
+	margin-block: 1px 5px;
+	flex-direction: column;
+	border: 1px solid gray;
+	box-shadow:
+		0 1px 0 white,
+		0 1px 0 white inset;
+
+	.toolbar {
+		// margin: 2px;
+		display: flex;
+		overflow: hidden;
+		position: relative;
+		flex-direction: row;
+		align-items: center;
+		// border: 1px solid gray;
+	}
+
+	.dragHandle {
+		width: 10px;
+		flex: 0 0 auto;
+		position: relative;
+		touch-action: none;
+		align-self: stretch;
+		box-sizing: border-box;
+
+		&::before {
+			content: "";
+			display: block;
+			position: absolute;
+			left: 2px;
+			top: 2px;
+			width: 4px;
+			bottom: 1px;
+			border: 1px solid;
+			box-sizing: border-box;
+			border-color: white gray gray white;
+		}
+	}
+
+	.menu {
+		flex: 0 0 auto;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		.button {
+			outline: 0;
+			height: 18px;
+			line-height: 1;
+			padding: 2px 5px;
+			margin-block: 1px;
+			background: silver;
+			box-sizing: border-box;
+
+			&:hover {
+				box-shadow:
+					1px 1px 0 white inset,
+					-1px -1px 0 gray inset;
+
+				&:active {
+					box-shadow:
+						1px 1px 0 gray inset,
+						-1px -1px 0 white inset;
+
+					span {
+						position: relative;
+						top: 1px;
+						left: 1px;
+					}
+				}
+			}
+
+			.hotkey {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+.statusBar {
+	gap: 2px;
+	padding-block: 2px;
+	display: flex;
+	margin-top: 2px;
+	align-items: center;
+
+	.field {
+		gap: 4px;
+		height: 100%;
+		display: flex;
+		padding-inline: 3px;
+		align-items: center;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		pointer-events: none;
+		user-select: none;
+
+		border: 1px solid;
+		border-color: gray white white gray;
+	}
+}

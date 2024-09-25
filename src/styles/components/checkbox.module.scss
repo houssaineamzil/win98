@@ -1,0 +1,51 @@
+.root {
+	border: none;
+	color: inherit;
+	font: inherit;
+	cursor: pointer;
+
+	display: flex;
+	position: relative;
+
+	box-shadow:
+		inset -1px -1px 0px white,
+		inset 1px 1px 0px gray,
+		inset -2px -2px 0px whitesmoke,
+		inset 2px 2px 0px black;
+
+	width: 16px;
+	height: 16px;
+	appearance: none;
+	background: white;
+	place-content: center;
+
+	&:checked {
+		&::before {
+			content: "";
+			inset: 0;
+			position: absolute;
+			background: url("../../assets/icons/checkbox/checkmark.svg") center
+				no-repeat;
+		}
+	}
+
+	&:disabled {
+		background: silver;
+		cursor: default;
+		box-shadow:
+			inset -1px -1px 0px white,
+			inset 1px 1px 0px gray,
+			inset -2px -2px 0px whitesmoke,
+			inset 2px 2px 0px black;
+
+		&:checked {
+			&::before {
+				content: "";
+				inset: 0;
+				position: absolute;
+				background: url("../../assets/icons/checkbox/checkmark-disabled.svg")
+					center no-repeat;
+			}
+		}
+	}
+}
