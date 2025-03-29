@@ -23,7 +23,6 @@ const Task: React.FC<{ task: TaskType }> = ({ task }) => {
 	const { activeTask } = useSystem();
 
 	return (
-		// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 		<div
 			onClick={
 				window.minimized

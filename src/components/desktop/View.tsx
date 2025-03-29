@@ -41,8 +41,6 @@ export const Icon: React.FC<{ application: ApplicationType }> = ({
 				y: activeTask
 					? tasks[activeTask]?.window.position.y + 7
 					: application.position.y,
-				// Object.values(tasks).slice(-1)[0]?.window.position.y + 7 ||
-				// application.position.y,
 			},
 			size: application.size,
 			minSize: application.minSize,

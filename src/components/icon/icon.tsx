@@ -2,7 +2,6 @@ import type React from "react";
 
 export const Icon: React.FC<{ name: string }> = ({ name }) => {
 	return (
-		// eslint-disable-next-line @next/next/no-img-element
 		<img
 			src={`/icons/${name}.png`}
 			width={48}
