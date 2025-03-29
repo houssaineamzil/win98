@@ -1,10 +1,9 @@
 import { taskbar } from "@/stores/taskbar.store";
 import styles from "@/styles/components/taskbar.module.css";
 import type React from "react";
-import { useSnapshot } from "valtio";
 
 export const Tray: React.FC = () => {
-	const { icons, time } = useSnapshot(taskbar);
+	const { icons, time } = taskbar();
 
 	return (
 		<div className={styles.tray}>
@@ -12,6 +11,7 @@ export const Tray: React.FC = () => {
 				{icons.map((icon) => (
 					<img
 						key={icon.title}
+						alt={icon.title}
 						className={styles.icon}
 						src={icon.icon}
 						title={icon.title}

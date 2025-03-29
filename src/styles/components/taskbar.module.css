@@ -47,7 +47,7 @@
 		gap: 4px;
 		flex: 1 0;
 		display: flex;
-		/* overflow: scroll; */
+		overflow: scroll;
 		flex-wrap: nowrap;
 		padding-inline: 2px;
 

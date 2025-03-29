@@ -1,101 +1,69 @@
-import type { StaticImageData } from "next/image";
-import type {
-	RndDragCallback,
-	RndResizeCallback,
-	RndResizeStartCallback,
-} from "react-rnd";
+import type { Window } from "@/utils/window";
+import type { RndDragCallback, RndResizeCallback } from "react-rnd";
 
-export interface Task {
-	id: string;
-	active: boolean;
-
-	window?: Window;
-	application: Application;
-
-	taskWillEnd?: () => void;
-}
-
-export interface ApplicationOptions {
+export interface ApplicationType {
 	name: string;
-	icons: {
-		16: StaticImageData;
-		32?: StaticImageData;
-		48?: StaticImageData;
+	description: string;
+	version: string;
+	resizable: boolean;
+	icon: string;
+
+	minSize: {
+		width: number;
+		height: number;
+	};
+	size: {
+		width: number;
+		height: number;
+	};
+	position: {
+		x: number;
+		y: number;
 	};
 
-	resizable: boolean;
-	singleton: boolean;
-	toolWindow: boolean;
-	maximizeButton: boolean;
-	minimizeButton: boolean;
-	closeButton: boolean;
+	content: React.ReactNode;
+
+	onResize?: RndResizeCallback;
+	onDrag?: RndDragCallback;
+}
+
+export interface WindowType {
+	title: string;
+	icon: string;
 
 	position: {
 		x: number;
 		y: number;
 	};
+
 	size: {
-		width: number | string;
-		height: number | string;
+		width: number;
+		height: number;
 	};
-	minSize: {
-		width: number | string;
-		height: number | string;
+	minSize?: {
+		width: number;
+		height: number;
 	};
-}
-
-export interface Application extends ApplicationOptions {
-	AppComponent: (props: any) => React.JSX.Element;
-}
-
-export interface Window {
-	id: string;
-	title: string;
-	icons: {
-		16: StaticImageData;
-		32?: StaticImageData;
-		48?: StaticImageData;
+	maxSize?: {
+		width: number;
+		height: number;
 	};
 
-	toolWindow: boolean;
-	maximizeButton: boolean;
-	minimizeButton: boolean;
-	closeButton: boolean;
+	toolWindow?: boolean;
+	minimizeButton?: boolean;
+	maximizeButton?: boolean;
+	closeButton?: boolean;
 
 	active: boolean;
-	focused: boolean;
-	minimized: boolean;
 	resizable: boolean;
 	maximized: boolean;
+	minimized: boolean;
+	isFullscreen: boolean;
+	alwaysOnTop: boolean;
+}
 
-	size: {
-		width: number | string;
-		height: number | string;
-	};
-	minSize: {
-		width: number | string;
-		height: number | string;
-	};
-	position: {
-		x: number;
-		y: number;
-	};
-
-	open: () => void;
-	close: () => void;
-	focus: () => void;
-	minimize: () => void;
-	unminimize: () => void;
-	maximize: () => void;
-	restore: () => void;
-	move: (position: { x: number; y: number }) => void;
-	resize: (size: { width: number | string; height: number | string }) => void;
-
-	onResizeStart?: RndResizeStartCallback;
-	onResize: RndResizeCallback;
-	onResizeStop?: RndResizeCallback;
-
-	onDragStart?: RndDragCallback;
-	onDrag: RndDragCallback;
-	onDragStop?: RndDragCallback;
+export interface TaskType {
+	id: string;
+	window: Window;
+	application: ApplicationType;
 }

@@ -3,7 +3,7 @@
 
 @font-face {
 	font-family: "MS Sans Serif";
-	src: url(../assets/fonts/MSSansSerif.ttf);
+	src: url(/fonts/MSSansSerif.ttf);
 }
 
 *,
@@ -37,7 +37,7 @@
 }
 
 ::-webkit-scrollbar-track {
-	background-image: url("../assets/icons/scrollbar/background.svg");
+	background-image: url("/icons/scrollbar/background.svg");
 }
 
 ::-webkit-scrollbar-thumb {
@@ -55,19 +55,19 @@
 
 ::-webkit-scrollbar-button:vertical:start {
 	height: 17px;
-	background-image: url("../assets/icons/scrollbar/up.svg");
+	background-image: url("/icons/scrollbar/up.svg");
 }
 ::-webkit-scrollbar-button:vertical:end {
 	height: 17px;
-	background-image: url("../assets/icons/scrollbar/down.svg");
+	background-image: url("/icons/scrollbar/down.svg");
 }
 ::-webkit-scrollbar-button:horizontal:start {
 	width: 16px;
-	background-image: url("../assets/icons/scrollbar/left.svg");
+	background-image: url("/icons/scrollbar/left.svg");
 }
 ::-webkit-scrollbar-button:horizontal:end {
 	width: 16px;
-	background-image: url("../assets/icons/scrollbar/right.svg");
+	background-image: url("/icons/scrollbar/right.svg");
 }
 
 body {

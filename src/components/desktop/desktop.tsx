@@ -4,7 +4,8 @@ import { useSystem } from "@/stores/system.store";
 import styles from "@/styles/components/desktop.module.css";
 import { cn } from "@/utils";
 import { useEffect } from "react";
-import { ExplorerView } from "./explorerView";
+import { Window } from "../window";
+import { View } from "./View";
 import { Wallpaper } from "./wallpaper";
 
 interface DesktopProps {
@@ -26,11 +27,9 @@ export const Desktop: React.FC<DesktopProps> = ({ className }) => {
 	return (
 		<div id="desktop" className={cn(styles.root, className)}>
 			<Wallpaper />
-			<ExplorerView />
-			{Object.values(tasks).map((task) => {
-				const { AppComponent } = task.application;
-
-				return <AppComponent key={task.id} id={task.id} />;
+			<View />
+			{Object.entries(tasks).map(([id, task]) => {
+				return <Window key={id} task={task} />;
 			})}
 		</div>
 	);

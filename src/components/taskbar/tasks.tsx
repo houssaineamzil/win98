@@ -1,12 +1,10 @@
-import type { Task } from "@/types";
-
 import { useWindow } from "@/hooks";
 import { useSystem } from "@/stores/system.store";
 import styles from "@/styles/components/taskbar.module.css";
+import type { TaskType } from "@/types";
 import { cn } from "@/utils";
 import Image from "next/image";
 import type React from "react";
-import { useEffect } from "react";
 
 export const Tasks: React.FC = () => {
 	const { tasks } = useSystem();
@@ -14,35 +12,33 @@ export const Tasks: React.FC = () => {
 	return (
 		<div className={styles.tasks}>
 			{Object.values(tasks).map((task) => {
-				return <Task key={window} {...task} />;
+				return <Task key={task.id} task={task} />;
 			})}
 		</div>
 	);
 };
 
-const Task: React.FC<any> = ({ id }) => {
-	const window = useWindow(id);
-
-	useEffect(() => {
-		console.log("taskbar: ", window);
-	}, [window]);
+const Task: React.FC<{ task: TaskType }> = ({ task }) => {
+	const window = useWindow(task);
+	const { activeTask } = useSystem();
 
 	return (
+		// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 		<div
 			onClick={
 				window.minimized
 					? window.unminimize
-					: window.focused
+					: activeTask === task.id
 						? window.minimize
 						: window.focus
 			}
-			className={cn(styles.task, { [styles.active]: window.active })}
+			className={cn(styles.task, { [styles.active]: activeTask === task.id })}
 		>
 			<Image
 				width={16}
 				height={16}
 				alt={window.title}
-				src={window.icons[16]}
+				src={window.icon}
 				className={styles.icon}
 			/>
 			<span className={styles.title}>{window.title}</span>

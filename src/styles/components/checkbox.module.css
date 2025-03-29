@@ -24,8 +24,7 @@
 			content: "";
 			inset: 0;
 			position: absolute;
-			background: url("../../assets/icons/checkbox/checkmark.svg") center
-				no-repeat;
+			background: url("/icons/checkbox/checkmark.svg") center no-repeat;
 		}
 	}
 
@@ -43,8 +42,8 @@
 				content: "";
 				inset: 0;
 				position: absolute;
-				background: url("../../assets/icons/checkbox/checkmark-disabled.svg")
-					center no-repeat;
+				background: url("/icons/checkbox/checkmark-disabled.svg") center
+					no-repeat;
 			}
 		}
 	}

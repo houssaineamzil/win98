@@ -1,5 +1,3 @@
-import type { Window } from "@/types";
-
 import { cn } from "@/utils";
 import type React from "react";
 
@@ -7,23 +5,50 @@ import { IconButton } from "@/components/button";
 import styles from "@/styles/components/window.module.css";
 import Image from "next/image";
 
-export const TitleBar: React.FC<Window> = ({ ...window }) => {
+interface Props {
+	title: string;
+	icon: string;
+
+	toolWindow?: boolean;
+	minimizeButton?: boolean;
+	maximizeButton?: boolean;
+	closeButton?: boolean;
+
+	maximized: boolean;
+
+	close: () => void;
+	minimize: () => void;
+	maximize: () => void;
+	restore: () => void;
+}
+
+export const TitleBar: React.FC<Props> = ({
+	title,
+	icon,
+	maximized,
+	toolWindow,
+	minimizeButton,
+	maximizeButton,
+	closeButton,
+	close,
+	minimize,
+	maximize,
+	restore,
+}) => {
 	return (
-		<div
-			className={cn(styles.titleBar, { [styles.inactive]: !window?.active })}
-		>
+		<div className={cn(styles.titleBar)}>
 			<div className={styles.titleWrapper}>
 				<Image
 					width={16}
 					height={16}
-					src={window.icons[16]}
-					alt=""
+					src={icon}
+					alt={`${title} icon`}
 					className={styles.icon}
 				/>
-				<div className={styles.title}>{window?.title}</div>
+				<div className={styles.title}>{title}</div>
 			</div>
 			<div className={styles.controls}>
-				{!window?.toolWindow && window?.minimizeButton && (
+				{!toolWindow && minimizeButton && (
 					<IconButton
 						icon={
 							<svg
@@ -32,16 +57,17 @@ export const TitleBar: React.FC<Window> = ({ ...window }) => {
 								height="2"
 								fill="none"
 							>
+								<title>Minimize Button</title>
 								<path fill="#000" d="M0 0h6v2H0z" />
 							</svg>
 						}
-						onClick={window?.minimize}
+						onClick={minimize}
 						aria-label="Minimize"
 					/>
 				)}
-				{!window?.toolWindow &&
-					window?.maximizeButton &&
-					(window?.maximized ? (
+				{!toolWindow &&
+					maximizeButton &&
+					(maximized ? (
 						<IconButton
 							icon={
 								<svg
@@ -50,13 +76,14 @@ export const TitleBar: React.FC<Window> = ({ ...window }) => {
 									height="9"
 									fill="none"
 								>
+									<title>Minimize Button</title>
 									<path
 										fill="#000"
 										d="M2 0h6v2H2zM7 2h1v4H7zM2 2h1v1H2zM6 5h1v1H6zM0 3h6v2H0zM5 5h1v4H5zM0 5h1v4H0zM1 8h4v1H1z"
 									/>
 								</svg>
 							}
-							onClick={window?.maximize}
+							onClick={maximize}
 							aria-label="Maximize"
 						/>
 					) : (
@@ -68,6 +95,7 @@ export const TitleBar: React.FC<Window> = ({ ...window }) => {
 									height="8"
 									fill="none"
 								>
+									<title>Restore Button</title>
 									<path
 										fillRule="evenodd"
 										clipRule="evenodd"
@@ -76,11 +104,11 @@ export const TitleBar: React.FC<Window> = ({ ...window }) => {
 									/>
 								</svg>
 							}
-							onClick={window?.restore}
+							onClick={restore}
 							aria-label="Restore"
 						/>
 					))}
-				{/* {window.toolWindow && (
+				{/* {toolWindow && (
 					<IconButton
 						icon={
 							<svg
@@ -88,6 +116,7 @@ export const TitleBar: React.FC<Window> = ({ ...window }) => {
 								width="6"
 								height="9"
 								fill="none">
+								<title>Tool Button</title>
 								<path
 									fill="#000"
 									d="M0 1h2v2H0zM1 0h4v1H1zM4 1h2v2H4zM3 3h2v1H3zM2 4h2v2H2zM2 7h2v2H2z"
@@ -97,7 +126,7 @@ export const TitleBar: React.FC<Window> = ({ ...window }) => {
 						aria-label="Help"
 					/>
 				)} */}
-				{window?.closeButton && (
+				{closeButton && (
 					<IconButton
 						icon={
 							<svg
@@ -106,6 +135,7 @@ export const TitleBar: React.FC<Window> = ({ ...window }) => {
 								height="7"
 								fill="none"
 							>
+								<title>Close Button</title>
 								<path
 									fillRule="evenodd"
 									clipRule="evenodd"
@@ -114,7 +144,7 @@ export const TitleBar: React.FC<Window> = ({ ...window }) => {
 								/>
 							</svg>
 						}
-						onClick={window?.close}
+						onClick={close}
 						aria-label="Close"
 					/>
 				)}
