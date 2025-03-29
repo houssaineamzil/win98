@@ -1,16 +1,16 @@
-import { cn } from "@utils"
-import React, { TextareaHTMLAttributes } from "react"
+import { cn } from "@/utils";
+import React, { type TextareaHTMLAttributes } from "react";
 
-import styles from "@styles/components/textarea.module.scss"
+import styles from "@/styles/components/textarea.module.css";
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-	resize?: "block" | "both" | "horizontal" | "inline" | "none" | "vertical"
+	resize?: "block" | "both" | "horizontal" | "inline" | "none" | "vertical";
 }
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 	function Textarea(
 		{ className, disabled, resize = "both", rows = 5, ...props },
-		ref
+		ref,
 	) {
 		return (
 			<textarea
@@ -21,6 +21,6 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 				style={{ resize: disabled ? "none" : resize }}
 				{...props}
 			/>
-		)
-	}
-)
+		);
+	},
+);

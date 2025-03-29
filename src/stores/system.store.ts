@@ -1,14 +1,16 @@
-import { Explorer } from "@programs/explorer/explorer"
-import { Task } from "@types"
-import { uid } from "@utils"
-import { StaticImageData } from "next/image"
+import { Explorer } from "@/programs/explorer/explorer"
+import type { Application, Task } from "@/types"
+import { uid } from "@/utils"
+import type { StaticImageData } from "next/image"
 import { proxy, useSnapshot } from "valtio"
+
+import SKY from "@/assets/wallpapers/blue.jpg"
 
 export const System = proxy<{
 	tasks: Record<string, Task>
 	activeTask: string | null
 
-	desktop: Array<any>
+	desktop: Array<Application>
 
 	settings: {
 		wallpaper: StaticImageData | null
@@ -18,26 +20,11 @@ export const System = proxy<{
 	activeTask: null,
 
 	desktop: [
-		{
-			name: "Internet Explorer",
-			icons: {
-				32: require("@assets/icons/internet-explorer-32x32.png")
-			},
-			onClick: () => {},
-			onDoubleClick: () => {
-				const id = uid()
-				System.tasks[id] = {
-					id,
-					active: true,
-					application: Explorer
-				}
-			},
-			onContextMenu: () => {}
-		}
+		Explorer,
 	],
 
 	settings: {
-		wallpaper: null
+		wallpaper: SKY,
 	}
 })
 

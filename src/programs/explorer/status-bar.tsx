@@ -1,30 +1,31 @@
-import { cn } from "@utils"
-import React from "react"
+import { cn } from "@/utils";
+import type React from "react";
 
-import styles from "@styles/components/window.module.scss"
-import Image, { StaticImageData } from "next/image"
+import styles from "@/styles/components/window.module.css";
+import Image from "next/image";
+import { Icon } from "@/components/icon";
 
 interface StatusBarProps {
-	url: string
-	icon: StaticImageData
+	url: string;
+	icon: string;
 	application: {
-		icon: StaticImageData
-		name: string
-	}
+		icon: string;
+		name: string;
+	};
 }
 
 export const StatusBar: React.FC<StatusBarProps> = ({
 	url,
 	icon,
-	application
+	application,
 }) => {
 	return (
 		<div className={cn(styles.statusBar)}>
 			<div className={styles.field} style={{ width: 250 }}>
-				<Image width={16} height={16} src={icon} alt={url} />
+				<Icon name={icon} size={16} />
 				<span id="status-bar-left-text">{url}</span>
 			</div>
-			<div className={styles.field} style={{ flex: 1 }}></div>
+			<div className={styles.field} style={{ flex: 1 }} />
 			<div className={styles.field} style={{ width: 170 }}>
 				<Image
 					width={16}
@@ -35,5 +36,5 @@ export const StatusBar: React.FC<StatusBarProps> = ({
 				<span id="status-bar-left-text">{application.name}</span>
 			</div>
 		</div>
-	)
-}
+	);
+};

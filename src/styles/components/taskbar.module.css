@@ -39,7 +39,7 @@
 			width: 25px;
 			height: 25px;
 			margin: 3px 2px;
-			background: no-repeat center/auto 20px;
+			background: no-repeat center / auto 20px;
 		}
 	}
 
@@ -47,7 +47,7 @@
 		gap: 4px;
 		flex: 1 0;
 		display: flex;
-		// overflow: scroll;
+		/* overflow: scroll; */
 		flex-wrap: nowrap;
 		padding-inline: 2px;
 
@@ -70,11 +70,8 @@
 			position: relative;
 			align-items: center;
 			background: silver;
-			box-shadow:
-				inset -1px -1px black,
-				inset 1px 1px white,
-				inset -2px -2px grey,
-				inset 2px 2px lightgrey;
+			box-shadow: inset -1px -1px black, inset 1px 1px white, inset -2px -2px
+				grey, inset 2px 2px lightgrey;
 
 			&:focus {
 				outline-offset: -4px;
@@ -86,21 +83,15 @@
 			}
 
 			&:not(:disabled):active {
-				box-shadow:
-					inset -1px -1px white,
-					inset 1px 1px black,
-					inset -2px -2px lightgrey,
-					inset 2px 2px grey;
+				box-shadow: inset -1px -1px white, inset 1px 1px black, inset -2px -2px
+					lightgrey, inset 2px 2px grey;
 				text-shadow: 0.5px 0.5px dimgrey;
 				background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAG0lEQVQYV2P8/////4MHDzIwHjhw4L+9vT0DAHAFCj6esq3FAAAAAElFTkSuQmCC");
 			}
 
 			&.active {
-				box-shadow:
-					inset -1px -1px white,
-					inset 1px 1px black,
-					inset -2px -2px lightgrey,
-					inset 2px 2px grey;
+				box-shadow: inset -1px -1px white, inset 1px 1px black, inset -2px -2px
+					lightgrey, inset 2px 2px grey;
 
 				background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAG0lEQVQYV2M8cODAf3t7ewbG/////z948CADAFuqCj64BtLKAAAAAElFTkSuQmCC");
 
@@ -133,10 +124,7 @@
 		padding: 4px;
 		display: flex;
 		padding-inline: 8px 4px;
-		box-shadow:
-			inset -1px -1px white,
-			inset 1px 1px #0a0a0a,
-			inset 2px 2px gray,
+		box-shadow: inset -1px -1px white, inset 1px 1px #0a0a0a, inset 2px 2px gray,
 			inset -2px -2px lightgrey;
 
 		.icons {

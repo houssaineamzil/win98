@@ -4,11 +4,8 @@
 	padding: 2px 3px;
 	background: silver;
 	flex-direction: column;
-	box-shadow:
-		inset -1px -1px #0a0a0a,
-		inset 1px 1px #dfdfdf,
-		inset -2px -2px grey,
-		inset 2px 2px #fff;
+	box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px
+		grey, inset 2px 2px #fff;
 
 	&.active {
 		z-index: 50;
@@ -70,18 +67,16 @@
 	margin-block: 1px 5px;
 	flex-direction: column;
 	border: 1px solid gray;
-	box-shadow:
-		0 1px 0 white,
-		0 1px 0 white inset;
+	box-shadow: 0 1px 0 white, 0 1px 0 white inset;
 
 	.toolbar {
-		// margin: 2px;
+		/* margin: 2px; */
 		display: flex;
 		overflow: hidden;
 		position: relative;
 		flex-direction: row;
 		align-items: center;
-		// border: 1px solid gray;
+		/* border: 1px solid gray; */
 	}
 
 	.dragHandle {
@@ -122,14 +117,10 @@
 			box-sizing: border-box;
 
 			&:hover {
-				box-shadow:
-					1px 1px 0 white inset,
-					-1px -1px 0 gray inset;
+				box-shadow: 1px 1px 0 white inset, -1px -1px 0 gray inset;
 
 				&:active {
-					box-shadow:
-						1px 1px 0 gray inset,
-						-1px -1px 0 white inset;
+					box-shadow: 1px 1px 0 gray inset, -1px -1px 0 white inset;
 
 					span {
 						position: relative;

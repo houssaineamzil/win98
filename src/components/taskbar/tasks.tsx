@@ -1,30 +1,31 @@
-import type { Task } from "@types"
+import type { Task } from "@/types";
 
-import { useSystem } from "@stores/system.store"
-import styles from "@styles/components/taskbar.module.scss"
-import { cn } from "@utils"
-import React, { useEffect } from "react"
-import { useWindow } from "@hooks"
-import Image from "next/image"
+import { useWindow } from "@/hooks";
+import { useSystem } from "@/stores/system.store";
+import styles from "@/styles/components/taskbar.module.css";
+import { cn } from "@/utils";
+import Image from "next/image";
+import type React from "react";
+import { useEffect } from "react";
 
 export const Tasks: React.FC = () => {
-	const { tasks } = useSystem()
+	const { tasks } = useSystem();
 
 	return (
 		<div className={styles.tasks}>
 			{Object.values(tasks).map((task) => {
-				return <Task key={window} {...task} />
+				return <Task key={window} {...task} />;
 			})}
 		</div>
-	)
-}
+	);
+};
 
 const Task: React.FC<any> = ({ id }) => {
-	const window = useWindow(id)
+	const window = useWindow(id);
 
 	useEffect(() => {
-		console.log("taskbar: ", window)
-	}, [window])
+		console.log("taskbar: ", window);
+	}, [window]);
 
 	return (
 		<div
@@ -32,10 +33,11 @@ const Task: React.FC<any> = ({ id }) => {
 				window.minimized
 					? window.unminimize
 					: window.focused
-					? window.minimize
-					: window.focus
+						? window.minimize
+						: window.focus
 			}
-			className={cn(styles.task, { [styles.active]: window.active })}>
+			className={cn(styles.task, { [styles.active]: window.active })}
+		>
 			<Image
 				width={16}
 				height={16}
@@ -46,5 +48,5 @@ const Task: React.FC<any> = ({ id }) => {
 			<span className={styles.title}>{window.title}</span>
 			{/* <span className={styles.tooltip}>{name}</span> */}
 		</div>
-	)
-}
+	);
+};

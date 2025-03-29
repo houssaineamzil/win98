@@ -1,10 +1,10 @@
-import { useSystem } from "@stores/system.store"
-import Image from "next/image"
+import { useSystem } from "@/stores/system.store";
+import Image from "next/image";
 
-import styles from "@styles/components/desktop.module.scss"
+import styles from "@/styles/components/desktop.module.css";
 
 export const Wallpaper = () => {
-	const { settings } = useSystem()
+	const { settings } = useSystem();
 
 	return (
 		settings.wallpaper && (
@@ -12,5 +12,5 @@ export const Wallpaper = () => {
 				<Image src={settings.wallpaper} fill alt="wallpaper" />
 			</div>
 		)
-	)
-}
+	);
+};

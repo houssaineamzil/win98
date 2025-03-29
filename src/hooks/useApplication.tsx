@@ -1,1 +1,1 @@
-export const useApplication = () => {}
+export const useApplication = () => {};

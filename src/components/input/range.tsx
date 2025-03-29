@@ -1,7 +1,7 @@
-import { cn } from "@utils"
-import React, { InputHTMLAttributes } from "react"
+import { cn } from "@/utils";
+import React, { type InputHTMLAttributes } from "react";
 
-import styles from "@styles/components/range.module.scss"
+import styles from "@/styles/components/range.module.css";
 
 interface RangeProps extends InputHTMLAttributes<HTMLInputElement> {}
 
@@ -14,6 +14,6 @@ export const Range = React.forwardRef<HTMLInputElement, RangeProps>(
 				className={cn(styles.root, className)}
 				{...props}
 			/>
-		)
-	}
-)
+		);
+	},
+);

@@ -1,11 +1,11 @@
-import { cn } from "@utils"
-import React, { ButtonHTMLAttributes } from "react"
+import { cn } from "@/utils";
+import React, { type ButtonHTMLAttributes } from "react";
 
-import styles from "@styles/components/button.module.scss"
-import { Button } from "./button"
+import styles from "@/styles/components/button.module.css";
+import { Button } from "./button";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-	icon: React.ReactNode
+	icon: React.ReactNode;
 }
 
 export const IconButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -14,6 +14,6 @@ export const IconButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			<Button className={cn(styles.icon, className)} ref={ref} {...props}>
 				{icon}
 			</Button>
-		)
-	}
-)
+		);
+	},
+);

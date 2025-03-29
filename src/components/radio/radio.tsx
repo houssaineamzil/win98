@@ -1,9 +1,9 @@
-import styles from "@styles/components/radio.module.scss"
-import { cn } from "@utils"
-import React, { InputHTMLAttributes, useEffect, useRef } from "react"
+import styles from "@/styles/components/radio.module.css";
+import { cn } from "@/utils";
+import React, { type InputHTMLAttributes, useEffect, useRef } from "react";
 
 interface RadioProps extends InputHTMLAttributes<HTMLInputElement> {
-	invalid?: boolean
+	invalid?: boolean;
 }
 
 export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
@@ -19,19 +19,20 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
 			required,
 			...props
 		},
-		ref
+		ref,
 	) {
-		ref = ref || useRef<HTMLInputElement>(null)
+		ref = ref || useRef<HTMLInputElement>(null);
 
 		useEffect(() => {
-			const { current: radio } = ref as React.MutableRefObject<HTMLInputElement>
-			radio?.setAttribute("aria-checked", checked ? "true" : "false")
-		}, [])
+			const { current: radio } =
+				ref as React.MutableRefObject<HTMLInputElement>;
+			radio?.setAttribute("aria-checked", checked ? "true" : "false");
+		}, []);
 
 		if (!name) {
 			console.warn(
-				"A radio input must have a `name` attribute.\nPass `name` as a prop directly to each Radio"
-			)
+				"A radio input must have a `name` attribute.\nPass `name` as a prop directly to each Radio",
+			);
 		}
 
 		return (
@@ -49,6 +50,6 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
 				name={name}
 				{...props}
 			/>
-		)
-	}
-)
+		);
+	},
+);

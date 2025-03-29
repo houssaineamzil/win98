@@ -1,14 +1,15 @@
-import React, { createContext, useContext } from "react"
+import type React from "react";
+import { createContext, useContext } from "react";
 
-const Context = createContext(null)
-export const useTheme = () => useContext(Context)
+const Context = createContext(null);
+export const useTheme = () => useContext(Context);
 
 export const Theme = ({
 	theme,
-	children
+	children,
 }: {
-	theme: any
-	children: React.ReactNode
+	theme: any;
+	children: React.ReactNode;
 }) => {
-	return <Context.Provider value={theme}>{children}</Context.Provider>
-}
+	return <Context.Provider value={theme}>{children}</Context.Provider>;
+};

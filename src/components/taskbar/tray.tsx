@@ -1,10 +1,10 @@
-import { taskbar } from "@stores/taskbar.store"
-import styles from "@styles/components/taskbar.module.scss"
-import React from "react"
-import { useSnapshot } from "valtio"
+import { taskbar } from "@/stores/taskbar.store";
+import styles from "@/styles/components/taskbar.module.css";
+import type React from "react";
+import { useSnapshot } from "valtio";
 
 export const Tray: React.FC = () => {
-	const { icons, time } = useSnapshot(taskbar)
+	const { icons, time } = useSnapshot(taskbar);
 
 	return (
 		<div className={styles.tray}>
@@ -27,15 +27,16 @@ export const Tray: React.FC = () => {
 					minute: "2-digit",
 					hour: "2-digit",
 					hour12: time.hour12,
-					timeZone: time.timezone
-				})}>
+					timeZone: time.timezone,
+				})}
+			>
 				{time.time.toLocaleTimeString(time.locale, {
 					hour: "2-digit",
 					minute: "2-digit",
 					hour12: time.hour12,
-					timeZone: time.timezone
+					timeZone: time.timezone,
 				})}
 			</div>
 		</div>
-	)
-}
+	);
+};

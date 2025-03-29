@@ -1,9 +1,10 @@
-import { cn } from "@utils"
-import React, { useState } from "react"
+import { cn } from "@/utils";
+import type React from "react";
+import { useState } from "react";
 
-import styles from "@styles/components/window.module.scss"
+import styles from "@/styles/components/window.module.css";
 
-interface ToolBarProps {}
+type ToolBarProps = {};
 
 const menuItems = [
 	{
@@ -12,10 +13,10 @@ const menuItems = [
 			{ name: "Exit" },
 			{ name: "Exit" },
 			{ name: "Exit" },
-			{ name: "Exit" }
-		]
-	}
-]
+			{ name: "Exit" },
+		],
+	},
+];
 
 export const MenuBar: React.FC<ToolBarProps> = () => {
 	return (
@@ -23,9 +24,9 @@ export const MenuBar: React.FC<ToolBarProps> = () => {
 			<div className={styles.dragHandle} />
 			<div className={cn(styles.menu)} role="menubar">
 				{menuItems.map((item) => {
-					const hotkey = item.name.charAt(0)
-					const [highlight, setHighlight] = useState(false)
-					const [active, setActive] = useState(false)
+					const hotkey = item.name.charAt(0);
+					const [highlight, setHighlight] = useState(false);
+					const [active, setActive] = useState(false);
 
 					return (
 						<div
@@ -33,7 +34,7 @@ export const MenuBar: React.FC<ToolBarProps> = () => {
 							id={item.name}
 							className={cn(styles.button, {
 								[styles.highlight]: highlight,
-								[styles.active]: active
+								[styles.active]: active,
 							})}
 							aria-expanded="false"
 							aria-haspopup="true"
@@ -42,15 +43,16 @@ export const MenuBar: React.FC<ToolBarProps> = () => {
 							tabIndex={-1}
 							onMouseEnter={() => setHighlight(true)}
 							onMouseLeave={() => setHighlight(false)}
-							onClick={() => setActive(true)}>
+							onClick={() => setActive(true)}
+						>
 							<span>
 								<span className={styles.hotkey}>{hotkey}</span>
 								{item.name.slice(1)}
 							</span>
 						</div>
-					)
+					);
 				})}
 			</div>
 		</div>
-	)
-}
+	);
+};

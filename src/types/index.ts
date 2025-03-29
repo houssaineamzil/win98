@@ -1,102 +1,101 @@
-import type { StaticImageData } from "next/image"
-import type { ElementType, ReactElement, ReactNode, RefObject } from "react"
-import {
+import type { StaticImageData } from "next/image";
+import type {
 	RndDragCallback,
 	RndResizeCallback,
-	RndResizeStartCallback
-} from "react-rnd"
+	RndResizeStartCallback,
+} from "react-rnd";
 
 export interface Task {
-	id: string
-	active: boolean
+	id: string;
+	active: boolean;
 
-	window?: Window
-	application: Application
+	window?: Window;
+	application: Application;
 
-	taskWillEnd?: () => void
+	taskWillEnd?: () => void;
 }
 
 export interface ApplicationOptions {
-	name: string
+	name: string;
 	icons: {
-		16: StaticImageData
-		32?: StaticImageData
-		48?: StaticImageData
-	}
+		16: StaticImageData;
+		32?: StaticImageData;
+		48?: StaticImageData;
+	};
 
-	resizable: boolean
-	singleton: boolean
-	toolWindow: boolean
-	maximizeButton: boolean
-	minimizeButton: boolean
-	closeButton: boolean
+	resizable: boolean;
+	singleton: boolean;
+	toolWindow: boolean;
+	maximizeButton: boolean;
+	minimizeButton: boolean;
+	closeButton: boolean;
 
 	position: {
-		x: number
-		y: number
-	}
+		x: number;
+		y: number;
+	};
 	size: {
-		width: number | string
-		height: number | string
-	}
+		width: number | string;
+		height: number | string;
+	};
 	minSize: {
-		width: number | string
-		height: number | string
-	}
+		width: number | string;
+		height: number | string;
+	};
 }
 
 export interface Application extends ApplicationOptions {
-	AppComponent: (props: any) => JSX.Element
+	AppComponent: (props: any) => React.JSX.Element;
 }
 
 export interface Window {
-	id: string
-	title: string
+	id: string;
+	title: string;
 	icons: {
-		16: StaticImageData
-		32?: StaticImageData
-		48?: StaticImageData
-	}
+		16: StaticImageData;
+		32?: StaticImageData;
+		48?: StaticImageData;
+	};
 
-	toolWindow: boolean
-	maximizeButton: boolean
-	minimizeButton: boolean
-	closeButton: boolean
+	toolWindow: boolean;
+	maximizeButton: boolean;
+	minimizeButton: boolean;
+	closeButton: boolean;
 
-	active: boolean
-	focused: boolean
-	minimized: boolean
-	resizable: boolean
-	maximized: boolean
+	active: boolean;
+	focused: boolean;
+	minimized: boolean;
+	resizable: boolean;
+	maximized: boolean;
 
 	size: {
-		width: number | string
-		height: number | string
-	}
+		width: number | string;
+		height: number | string;
+	};
 	minSize: {
-		width: number | string
-		height: number | string
-	}
+		width: number | string;
+		height: number | string;
+	};
 	position: {
-		x: number
-		y: number
-	}
+		x: number;
+		y: number;
+	};
 
-	open: () => void
-	close: () => void
-	focus: () => void
-	minimize: () => void
-	unminimize: () => void
-	maximize: () => void
-	restore: () => void
-	move: (position: { x: number; y: number }) => void
-	resize: (size: { width: number | string; height: number | string }) => void
+	open: () => void;
+	close: () => void;
+	focus: () => void;
+	minimize: () => void;
+	unminimize: () => void;
+	maximize: () => void;
+	restore: () => void;
+	move: (position: { x: number; y: number }) => void;
+	resize: (size: { width: number | string; height: number | string }) => void;
 
-	onResizeStart?: RndResizeStartCallback
-	onResize: RndResizeCallback
-	onResizeStop?: RndResizeCallback
+	onResizeStart?: RndResizeStartCallback;
+	onResize: RndResizeCallback;
+	onResizeStop?: RndResizeCallback;
 
-	onDragStart?: RndDragCallback
-	onDrag: RndDragCallback
-	onDragStop?: RndDragCallback
+	onDragStart?: RndDragCallback;
+	onDrag: RndDragCallback;
+	onDragStop?: RndDragCallback;
 }

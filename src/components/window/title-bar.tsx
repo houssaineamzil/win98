@@ -1,16 +1,17 @@
-import type { Window } from "@types"
+import type { Window } from "@/types";
 
-import { cn } from "@utils"
-import React from "react"
+import { cn } from "@/utils";
+import type React from "react";
 
-import { IconButton } from "@components/button"
-import styles from "@styles/components/window.module.scss"
-import Image from "next/image"
+import { IconButton } from "@/components/button";
+import styles from "@/styles/components/window.module.css";
+import Image from "next/image";
 
 export const TitleBar: React.FC<Window> = ({ ...window }) => {
 	return (
 		<div
-			className={cn(styles.titleBar, { [styles.inactive]: !window?.active })}>
+			className={cn(styles.titleBar, { [styles.inactive]: !window?.active })}
+		>
 			<div className={styles.titleWrapper}>
 				<Image
 					width={16}
@@ -29,7 +30,8 @@ export const TitleBar: React.FC<Window> = ({ ...window }) => {
 								xmlns="http://www.w3.org/2000/svg"
 								width="6"
 								height="2"
-								fill="none">
+								fill="none"
+							>
 								<path fill="#000" d="M0 0h6v2H0z" />
 							</svg>
 						}
@@ -46,7 +48,8 @@ export const TitleBar: React.FC<Window> = ({ ...window }) => {
 									xmlns="http://www.w3.org/2000/svg"
 									width="8"
 									height="9"
-									fill="none">
+									fill="none"
+								>
 									<path
 										fill="#000"
 										d="M2 0h6v2H2zM7 2h1v4H7zM2 2h1v1H2zM6 5h1v1H6zM0 3h6v2H0zM5 5h1v4H5zM0 5h1v4H0zM1 8h4v1H1z"
@@ -63,7 +66,8 @@ export const TitleBar: React.FC<Window> = ({ ...window }) => {
 									xmlns="http://www.w3.org/2000/svg"
 									width="8"
 									height="8"
-									fill="none">
+									fill="none"
+								>
 									<path
 										fillRule="evenodd"
 										clipRule="evenodd"
@@ -100,7 +104,8 @@ export const TitleBar: React.FC<Window> = ({ ...window }) => {
 								xmlns="http://www.w3.org/2000/svg"
 								width="8"
 								height="7"
-								fill="none">
+								fill="none"
+							>
 								<path
 									fillRule="evenodd"
 									clipRule="evenodd"
@@ -115,5 +120,5 @@ export const TitleBar: React.FC<Window> = ({ ...window }) => {
 				)}
 			</div>
 		</div>
-	)
-}
+	);
+};

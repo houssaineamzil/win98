@@ -1,1 +1,1 @@
-export const useTasks = () => {}
+export const useTasks = () => {};

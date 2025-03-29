@@ -1,35 +1,34 @@
-import { useSystem } from "@stores/system.store"
-import styles from "@styles/components/desktop.module.scss"
-import Image from "next/image"
+import { useSystem } from "@/stores/system.store";
+import styles from "@/styles/components/desktop.module.css";
+import Image from "next/image";
 
-export const ExplorerIcon = ({
-	name,
-	icons,
-	onClick,
-	onDoubleClick,
-	onContextMenu
-}: any) => {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+	name: string;
+	icons: { 32: string; 16: string };
+}
+
+export const ExplorerIcon: React.FC<Props> = ({ name, icons, ...props }) => {
 	return (
 		<button
+			type="button"
 			title={name}
 			className={styles.explorerIcon}
-			onClick={onClick}
-			onDoubleClick={onDoubleClick}
-			onContextMenu={onContextMenu}>
+			{...props}
+		>
 			<Image src={icons[32]} width={32} height={32} alt={name} />
 			<div className={styles.name}>{name}</div>
 		</button>
-	)
-}
+	);
+};
 
 export const ExplorerView = () => {
-	const { desktop } = useSystem()
+	const { desktop } = useSystem();
 
 	return (
 		<div className={styles.explorerView}>
-			{desktop.map((application, index) => (
-				<ExplorerIcon key={index} {...application} />
+			{desktop.map((application) => (
+				<ExplorerIcon key={application.id} {...application} />
 			))}
 		</div>
-	)
-}
+	);
+};

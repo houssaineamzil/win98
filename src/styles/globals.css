@@ -1,8 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import "variables";
+@import "tailwindcss";
+@import "./variables.css";
 
 @font-face {
 	font-family: "MS Sans Serif";
@@ -78,7 +75,7 @@ body {
 	height: 100dvh;
 	color: white;
 	font-size: 14px;
-	// font-weight: 600;
+	/* font-weight: 600; */
 	overflow: hidden;
 	user-select: none;
 	line-height: 20px;
