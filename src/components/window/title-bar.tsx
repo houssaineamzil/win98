@@ -3,7 +3,7 @@ import type React from "react";
 
 import { IconButton } from "@/components/button";
 import styles from "@/styles/components/window.module.css";
-import Image from "next/image";
+import { Icon } from "../icon";
 
 interface Props {
 	title: string;
@@ -38,13 +38,7 @@ export const TitleBar: React.FC<Props> = ({
 	return (
 		<div className={cn(styles.titleBar)}>
 			<div className={styles.titleWrapper}>
-				<Image
-					width={16}
-					height={16}
-					src={icon}
-					alt={`${title} icon`}
-					className={styles.icon}
-				/>
+				<Icon size={16} name={icon} className={styles.icon} />
 				<div className={styles.title}>{title}</div>
 			</div>
 			<div className={styles.controls}>

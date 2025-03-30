@@ -17,6 +17,9 @@ export const useSystem = create<{
 
 	settings: {
 		wallpaper: string | null;
+		hour12: boolean;
+		locale: string;
+		timezone: string;
 	};
 }>(() => ({
 	activeTask: null,

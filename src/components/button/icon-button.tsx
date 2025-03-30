@@ -1,14 +1,14 @@
 import { cn } from "@/utils";
-import React, { type ButtonHTMLAttributes } from "react";
+import { forwardRef } from "react";
 
 import styles from "@/styles/components/button.module.css";
 import { Button } from "./button";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	icon: React.ReactNode;
 }
 
-export const IconButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
+export const IconButton = forwardRef<HTMLButtonElement, ButtonProps>(
 	function IconButton({ icon, className, ...props }, ref) {
 		return (
 			<Button className={cn(styles.icon, className)} ref={ref} {...props}>

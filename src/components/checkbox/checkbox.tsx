@@ -1,12 +1,12 @@
 import styles from "@/styles/components/checkbox.module.css";
 import { cn } from "@/utils";
-import React, { type InputHTMLAttributes, useEffect, useRef } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 
-interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
+interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	invalid?: boolean;
 }
 
-export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 	function Checkbox(
 		{
 			value,

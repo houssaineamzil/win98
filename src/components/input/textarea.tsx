@@ -1,7 +1,6 @@
+import styles from "@/styles/components/textarea.module.css";
 import { cn } from "@/utils";
 import React, { type TextareaHTMLAttributes } from "react";
-
-import styles from "@/styles/components/textarea.module.css";
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 	resize?: "block" | "both" | "horizontal" | "inline" | "none" | "vertical";

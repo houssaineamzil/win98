@@ -1,7 +1,6 @@
 import { useSystem } from "@/stores/system.store";
-import Image from "next/image";
-
 import styles from "@/styles/components/desktop.module.css";
+import Image from "next/image";
 
 export const Wallpaper = () => {
 	const { settings } = useSystem();

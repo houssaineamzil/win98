@@ -1,7 +1,6 @@
 import { taskbar } from "@/stores/taskbar.store";
 import styles from "@/styles/components/taskbar.module.css";
-import Image from "next/image";
-import type React from "react";
+import { Icon } from "../icon";
 
 export const Pinned: React.FC = () => {
 	const { pinned } = taskbar();
@@ -11,7 +10,7 @@ export const Pinned: React.FC = () => {
 			{pinned.map((app) => {
 				return (
 					<div key={app.id}>
-						<Image width={16} height={16} src={app.icon} alt={app.name} />
+						<Icon name={app.icon} size={16} />
 					</div>
 				);
 			})}

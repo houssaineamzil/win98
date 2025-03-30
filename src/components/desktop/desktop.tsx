@@ -2,8 +2,10 @@
 
 import { useSystem } from "@/stores/system.store";
 import styles from "@/styles/components/desktop.module.css";
+import type { TaskType } from "@/types";
 import { cn } from "@/utils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useStore } from "zustand";
 import { Window } from "../window";
 import { View } from "./View";
 import { Wallpaper } from "./wallpaper";
@@ -13,7 +15,12 @@ interface DesktopProps {
 }
 
 export const Desktop: React.FC<DesktopProps> = ({ className }) => {
-	const { tasks } = useSystem();
+	const { tasks } = useStore(useSystem);
+	const [windows, setWindows] = useState<TaskType[]>([]);
+
+	useEffect(() => {
+		setWindows(Object.values(tasks));
+	}, [tasks]);
 
 	useEffect(() => {
 		document.addEventListener("contextmenu", (event) => event.preventDefault());
@@ -28,8 +35,8 @@ export const Desktop: React.FC<DesktopProps> = ({ className }) => {
 		<div id="desktop" className={cn(styles.root, className)}>
 			<Wallpaper />
 			<View />
-			{Object.entries(tasks).map(([id, task]) => {
-				return <Window key={id} task={task} />;
+			{windows.map((task) => {
+				return <Window key={task.id} task={task} />;
 			})}
 		</div>
 	);

@@ -8,7 +8,7 @@ export const minSize = {
 export const Applications = {
 	[ApplicationsEnum.EXPLORER]: {
 		name: "File Explorer",
-		icon: "/icons/computer_2_cool-1.png",
+		icon: "computer_2_cool-1",
 		description: "",
 		version: "1.0.0",
 		resizable: true,
@@ -28,7 +28,7 @@ export const Applications = {
 	},
 	[ApplicationsEnum.NOTEPAD]: {
 		name: "Notepad",
-		icon: "/icons/file_set-1.png",
+		icon: "notepad-0",
 		description: "",
 		version: "1.0.0",
 		resizable: true,

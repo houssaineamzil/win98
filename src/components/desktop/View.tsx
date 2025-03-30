@@ -4,10 +4,10 @@ import styles from "@/styles/components/desktop.module.css";
 import type { ApplicationType } from "@/types";
 import { cn, uid } from "@/utils";
 import { Window } from "@/utils/window";
-import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Icon } from "../icon";
 
-export const Icon: React.FC<{ application: ApplicationType }> = ({
+export const App: React.FC<{ application: ApplicationType }> = ({
 	application,
 }) => {
 	const ref = useRef<HTMLButtonElement | null>(null);
@@ -73,12 +73,7 @@ export const Icon: React.FC<{ application: ApplicationType }> = ({
 			className={cn(styles.icon, { [styles.focus]: isFocus })}
 			onDoubleClick={open}
 		>
-			<Image
-				src={application.icon}
-				width={32}
-				height={32}
-				alt={application.name}
-			/>
+			<Icon name={application.icon} />
 			<div className={styles.name}>{application.name}</div>
 		</button>
 	);
@@ -90,7 +85,7 @@ export const View = () => {
 		<div className={styles.view}>
 			{desktop.map((app) => {
 				const application = Applications[app];
-				return <Icon key={application.name} application={application} />;
+				return <App key={application.name} application={application} />;
 			})}
 		</div>
 	);

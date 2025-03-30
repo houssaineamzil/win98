@@ -3,9 +3,7 @@ import { useSystem } from "@/stores/system.store";
 import styles from "@/styles/components/taskbar.module.css";
 import type { TaskType } from "@/types";
 import { cn } from "@/utils";
-import Image from "next/image";
-import type React from "react";
-
+import { Icon } from "../icon";
 export const Tasks: React.FC = () => {
 	const { tasks } = useSystem();
 
@@ -33,13 +31,7 @@ const Task: React.FC<{ task: TaskType }> = ({ task }) => {
 			}
 			className={cn(styles.task, { [styles.active]: activeTask === task.id })}
 		>
-			<Image
-				width={16}
-				height={16}
-				alt={window.title}
-				src={window.icon}
-				className={styles.icon}
-			/>
+			<Icon size={16} name={window.icon} className={styles.icon} />
 			<span className={styles.title}>{window.title}</span>
 			{/* <span className={styles.tooltip}>{name}</span> */}
 		</div>

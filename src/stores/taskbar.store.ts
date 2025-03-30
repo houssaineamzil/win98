@@ -5,34 +5,34 @@ export const taskbar = create(() => ({
 		{
 			id: "navigator",
 			name: "Navigator",
-			icon: "/icons/internet-explorer.png",
+			icon: "msie1-4",
 		},
 		{
 			id: "outlook",
 			name: "Outlook",
-			icon: "/icons/outlook_express-3.png",
+			icon: "outlook_express-3",
 		},
 		{
 			id: "channels",
 			name: "Channels",
-			icon: "/icons/chm-16x16.png",
+			icon: "channels-5",
 		},
 		{
 			id: "desktop",
 			name: "Desktop",
-			icon: "/icons/desktop-16x16.png",
+			icon: "desktop_old-4",
 		},
 	],
 	icons: [
 		{
 			id: "scheduler",
-			icon: "/icons/time_and_date-1.png",
+			icon: "time_and_date-1",
 			title: "Task Scheduler is not ready.",
 		},
 		{
 			id: "volume",
 			title: "Volume",
-			icon: "/icons/loudspeaker_rays-1.png",
+			icon: "loudspeaker_rays-1",
 		},
 	],
 	time: {

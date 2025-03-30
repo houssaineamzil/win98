@@ -6,17 +6,20 @@ import type { RndDragCallback, RndResizeCallback } from "react-rnd";
 export const useWindow = (task: TaskType) => {
 	const { tasks } = useSystem();
 	const window = task.window;
-
 	const close = () => {
+		const taskEntries = Object.entries(tasks);
+		const prevTask =
+			taskEntries.length > 1 ? taskEntries[taskEntries.length - 2][1].id : null;
+			const rest = Object.fromEntries(taskEntries.filter(([id]) => id !== task.id))
+
+			console.log(rest);
+			
+
 		useSystem.setState((state) => ({
 			...state,
-			activeTask:
-				tasks[
-					Object.keys(tasks).findIndex((key) => tasks[key].id === task.id) - 1
-				].id || null,
+			tasks: rest,
+			activeTask: prevTask || null,
 		}));
-
-		delete tasks[task.id];
 	};
 
 	const focus = () => {

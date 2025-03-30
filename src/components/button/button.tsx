@@ -1,14 +1,14 @@
 import { cn } from "@/utils";
-import React, { type ButtonHTMLAttributes } from "react";
 
 import styles from "@/styles/components/button.module.css";
+import { forwardRef } from "react";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	active?: boolean;
 	disabled?: boolean;
 }
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 	function Button(
 		{ className, active = false, disabled = false, children, ...props },
 		ref,

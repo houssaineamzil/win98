@@ -1,40 +1,42 @@
 import { taskbar } from "@/stores/taskbar.store";
 import styles from "@/styles/components/taskbar.module.css";
-import type React from "react";
+import { Icon } from "../icon";
+import { useSystem } from "@/stores/system.store";
 
 export const Tray: React.FC = () => {
 	const { icons, time } = taskbar();
+	const { settings } = useSystem();
 
 	return (
 		<div className={styles.tray}>
 			<div className={styles.icons}>
 				{icons.map((icon) => (
-					<img
+					<Icon
 						key={icon.title}
-						alt={icon.title}
-						className={styles.icon}
-						src={icon.icon}
+						name={icon.icon}
+						size={16}
 						title={icon.title}
+						className={styles.icon}
 					/>
 				))}
 			</div>
 			<div
 				className={styles.time}
-				title={time.time.toLocaleString(time.locale, {
+				title={time.time.toLocaleString(settings.locale, {
 					weekday: "long",
 					month: "long",
 					day: "2-digit",
 					minute: "2-digit",
 					hour: "2-digit",
-					hour12: time.hour12,
-					timeZone: time.timezone,
+					hour12: settings.hour12,
+					timeZone: settings.timezone,
 				})}
 			>
-				{time.time.toLocaleTimeString(time.locale, {
+				{time.time.toLocaleTimeString(settings.locale, {
 					hour: "2-digit",
 					minute: "2-digit",
-					hour12: time.hour12,
-					timeZone: time.timezone,
+					hour12: settings.hour12,
+					timeZone: settings.timezone,
 				})}
 			</div>
 		</div>
