@@ -1,18 +1,22 @@
-import React from "react"
-import "@styles/globals.scss"
-import { Metadata } from "next"
+import type { Metadata } from "next";
+
+import "@/styles/globals.css";
 
 export const metadata: Metadata = {
 	title: "Windows 98",
-	description: ""
-}
+	description: "Created by Houssaine Amzil",
+};
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
+const RootLayout = async ({
+	children,
+}: Readonly<{
+	children: React.ReactNode;
+}>) => {
 	return (
-		<html>
+		<html lang="en">
 			<body>{children}</body>
 		</html>
-	)
-}
+	);
+};
 
-export default RootLayout
+export default RootLayout;

@@ -3,32 +3,35 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
+		"dev": "next dev --turbopack",
+		"check": "biome check --fix --unsafe",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint",
-		"prettify": "prettier -w . --log-level warn",
-		"clean": "rm -r .next && pnpm run prettify"
+		"lint": "biome lint",
+		"lint:fix": "biome lint --fix",
+		"format": "biome format --fix",
+		"clean": "rm -r .next && bun run check"
 	},
 	"dependencies": {
 		"clsx": "^2.1.1",
-		"next": "14.2.6",
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1",
-		"react-rnd": "^10.4.12",
-		"sass": "^1.77.8",
-		"tailwind-merge": "^2.5.2",
-		"valtio": "^1.13.2",
-		"zustand": "^4.5.5"
+		"next": "15.2.4",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"react-rnd": "^10.5.2",
+		"sass": "^1.86.0",
+		"tailwind-merge": "^3.0.2",
+		"zustand": "^5.0.3"
 	},
 	"devDependencies": {
-		"@types/node": "^22.5.0",
-		"@types/react": "^18.3.4",
-		"@types/react-dom": "^18.3.0",
-		"eslint": "^9.9.1",
-		"eslint-config-next": "14.2.6",
-		"postcss": "^8.4.41",
-		"tailwindcss": "^3.4.10",
-		"typescript": "^5.5.4"
+		"@tailwindcss/postcss": "^4.0.17",
+		"@biomejs/biome": "^1.9.4",
+		"@types/node": "^22.13.14",
+		"@types/react": "^19.0.12",
+		"@types/react-dom": "^19.0.4",
+		"eslint": "^9.23.0",
+		"eslint-config-next": "15.2.4",
+		"postcss": "^8.5.3",
+		"tailwindcss": "^4.0.17",
+		"typescript": "^5.8.2"
 	}
 }

@@ -1,0 +1,88 @@
+@import "tailwindcss";
+@import "./variables.css";
+
+@font-face {
+	font-family: "MS Sans Serif";
+	src: url(/fonts/MSSansSerif.ttf);
+}
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+*:focus,
+*:focus-visible,
+*:focus-within {
+	outline: none;
+}
+
+*::selection {
+	color: white;
+	background: navy;
+}
+
+::-webkit-scrollbar {
+	width: 16px;
+}
+::-webkit-scrollbar:horizontal {
+	height: 17px;
+}
+
+::-webkit-scrollbar-corner {
+	background: #dfdfdf;
+}
+
+::-webkit-scrollbar-track {
+	background-image: url("/icons/scrollbar/background.svg");
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #dfdfdf;
+	box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey,
+		inset 2px 2px #dfdfdf;
+}
+
+::-webkit-scrollbar-button:horizontal:start:decrement,
+::-webkit-scrollbar-button:horizontal:end:increment,
+::-webkit-scrollbar-button:vertical:start:decrement,
+::-webkit-scrollbar-button:vertical:end:increment {
+	display: block;
+}
+
+::-webkit-scrollbar-button:vertical:start {
+	height: 17px;
+	background-image: url("/icons/scrollbar/up.svg");
+}
+::-webkit-scrollbar-button:vertical:end {
+	height: 17px;
+	background-image: url("/icons/scrollbar/down.svg");
+}
+::-webkit-scrollbar-button:horizontal:start {
+	width: 16px;
+	background-image: url("/icons/scrollbar/left.svg");
+}
+::-webkit-scrollbar-button:horizontal:end {
+	width: 16px;
+	background-image: url("/icons/scrollbar/right.svg");
+}
+
+body {
+	width: 100dvw;
+	height: 100dvh;
+	color: white;
+	font-size: 14px;
+	/* font-weight: 600; */
+	overflow: hidden;
+	user-select: none;
+	line-height: 20px;
+	background: teal;
+	font-family: "MS Sans Serif", "Segoe UI", sans-serif;
+}
+
+img {
+	object-fit: cover;
+}

@@ -1,37 +1,43 @@
-"use client"
+"use client";
 
-import { useSystem } from "@stores/system.store"
-import styles from "@styles/components/desktop.module.scss"
-import { cn } from "@utils"
-import { useEffect } from "react"
-import { ExplorerView } from "./explorerView"
-import { Wallpaper } from "./wallpaper"
+import { useSystem } from "@/stores/system.store";
+import styles from "@/styles/components/desktop.module.scss";
+import type { TaskType } from "@/types";
+import { cn } from "@/utils";
+import { useEffect, useState } from "react";
+import { useStore } from "zustand";
+import { Window } from "../window";
+import { View } from "./View";
+import { Wallpaper } from "./wallpaper";
 
 interface DesktopProps {
-	className?: string
+	className?: string;
 }
 
 export const Desktop: React.FC<DesktopProps> = ({ className }) => {
-	const { tasks } = useSystem()
+	const { tasks } = useStore(useSystem);
+	const [windows, setWindows] = useState<TaskType[]>([]);
 
 	useEffect(() => {
-		document.addEventListener("contextmenu", (event) => event.preventDefault())
+		setWindows(Object.values(tasks));
+	}, [tasks]);
+
+	useEffect(() => {
+		document.addEventListener("contextmenu", (event) => event.preventDefault());
 
 		return () =>
 			document.removeEventListener("contextmenu", (event) =>
-				event.preventDefault()
-			)
-	}, [])
+				event.preventDefault(),
+			);
+	}, []);
 
 	return (
 		<div id="desktop" className={cn(styles.root, className)}>
 			<Wallpaper />
-			<ExplorerView />
-			{Object.values(tasks).map((task) => {
-				const { AppComponent } = task.application
-
-				return <AppComponent key={task.id} id={task.id} />
+			<View />
+			{windows.map((task) => {
+				return <Window key={task.id} task={task} />;
 			})}
 		</div>
-	)
-}
+	);
+};

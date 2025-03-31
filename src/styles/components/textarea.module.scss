@@ -24,11 +24,8 @@
 		color: gray;
 		background: silver;
 		text-shadow: 1px 1px 0 white;
-		box-shadow:
-			inset -1px -1px white,
-			inset 1px 1px grey,
-			inset -2px -2px lightgray,
-			inset 2px 2px black;
+		box-shadow: inset -1px -1px white, inset 1px 1px grey, inset -2px -2px
+			lightgray, inset 2px 2px black;
 
 		&::placeholder {
 			color: gray;

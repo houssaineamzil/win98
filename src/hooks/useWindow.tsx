@@ -1,128 +1,225 @@
-import type { Window } from "@types"
+import type { TaskType } from "@/types";
 
-import { System, useSystem } from "@stores/system.store"
-import { useState } from "react"
-import { RndDragCallback, RndResizeCallback } from "react-rnd"
+import { useSystem } from "@/stores/system.store";
+import type { RndDragCallback, RndResizeCallback } from "react-rnd";
 
-export const useWindow = (id: string): Window => {
-	const { tasks, activeTask } = useSystem()
-
-	const task = tasks[id]
-
-	const opened = Object.keys(tasks).includes(id)
-	const focused = activeTask === id
-	const [minimized, setMinimized] = useState(false)
-	const [maximized, setMaximized] = useState(false)
-	const resizable = task.application?.resizable
-	const active = opened && !minimized && focused
-
-	const [size, setSize] = useState(task.application?.size)
-	const [position, setPosition] = useState(task.application?.position)
-
-	const open = () => {
-		return
-	}
-
+export const useWindow = (task: TaskType) => {
+	const { tasks } = useSystem();
+	const window = task.window;
 	const close = () => {
-		delete System.tasks[id]
-	}
+		const taskEntries = Object.entries(tasks);
+		const prevTask =
+			taskEntries.length > 1 ? taskEntries[taskEntries.length - 2][1].id : null;
+		const rest = Object.fromEntries(
+			taskEntries.filter(([id]) => id !== task.id),
+		);
+
+		console.log(rest);
+
+		useSystem.setState((state) => ({
+			...state,
+			tasks: rest,
+			activeTask: prevTask || null,
+		}));
+	};
 
 	const focus = () => {
-		!focused && (System.activeTask = id)
-	}
+		useSystem.setState((state) => ({
+			...state,
+			tasks: {
+				...state.tasks,
+				[task.id]: {
+					...task,
+					window: {
+						...window,
+						active: true,
+					},
+				},
+			},
+			activeTask: task.id,
+		}));
+	};
 
 	const minimize = () => {
-		return setMinimized(true)
-	}
+		if (!window.minimized) {
+			useSystem.setState((state) => ({
+				...state,
+				tasks: {
+					...state.tasks,
+					[task.id]: {
+						...task,
+						window: {
+							...window,
+							active: false,
+							minimized: true,
+						},
+					},
+				},
+				activeTask:
+					tasks[
+						Object.keys(tasks).findIndex((key) => tasks[key].id === task.id) - 1
+					].id || null,
+			}));
+		}
+	};
 
 	const unminimize = () => {
-		return setMinimized(false)
-	}
+		if (window.minimized) {
+			useSystem.setState((state) => ({
+				...state,
+				tasks: {
+					...state.tasks,
+					[task.id]: {
+						...task,
+						window: {
+							...window,
+							active: true,
+							minimized: false,
+						},
+					},
+				},
+				activeTask: task.id,
+			}));
+		}
+	};
 
 	const maximize = () => {
-		if (!maximized) {
-			setSize({
-				width: window.innerWidth,
-				height: window.innerHeight - 38
-			})
-			setPosition({ x: 0, y: 0 })
-			return setMaximized(true)
+		if (!window.maximized) {
+			useSystem.setState((state) => ({
+				...state,
+				tasks: {
+					...state.tasks,
+					[task.id]: {
+						...task,
+						window: {
+							...window,
+							maximized: true,
+							size: {
+								width: global.window.innerWidth,
+								height: global.window.innerHeight - 38,
+							},
+							position: {
+								x: 0,
+								y: 0,
+							},
+						},
+					},
+				},
+			}));
 		}
-	}
+	};
 
 	const restore = () => {
-		if (maximized) {
-			setSize(task.application?.size)
-			setPosition(task.application?.position)
-			return setMaximized(false)
+		if (window.maximized) {
+			useSystem.setState((state) => ({
+				...state,
+				tasks: {
+					...state.tasks,
+					[task.id]: {
+						...task,
+						window: {
+							...window,
+							maximized: false,
+							size: task.application.size,
+							position: task.application.position,
+						},
+					},
+				},
+			}));
 		}
-	}
+	};
 
 	const move = (position: { x: number; y: number }) => {
-		return setPosition(position)
-	}
+		useSystem.setState((state) => ({
+			...state,
+			tasks: {
+				...state.tasks,
+				[task.id]: {
+					...task,
+					window: {
+						...window,
+						position,
+					},
+				},
+			},
+		}));
+	};
 
 	const resize = (size: {
-		width: number | string
-		height: number | string
+		width: number;
+		height: number;
 	}) => {
-		return resizable && setSize(size)
-	}
+		if (task.application.resizable && window.resizable)
+			useSystem.setState((state) => ({
+				...state,
+				tasks: {
+					...state.tasks,
+					[task.id]: {
+						...task,
+						window: {
+							...window,
+							size,
+						},
+					},
+				},
+			}));
+	};
+
+	const fullscreen = () => {
+		if (!window.isFullscreen)
+			useSystem.setState((state) => ({
+				...state,
+				tasks: {
+					...state.tasks,
+					[task.id]: {
+						...task,
+						window: {
+							...window,
+							maximized: true,
+							size: {
+								width: global.window.innerWidth,
+								height: global.window.innerHeight,
+							},
+							position: {
+								x: 0,
+								y: 0,
+							},
+						},
+					},
+				},
+			}));
+	};
 
 	const onDrag: RndDragCallback = (event, data) => {
-		setPosition({
-			x: data.x,
-			y: data.y
-		})
-		task.application?.onDrag && task.application?.onDrag(event, data)
-	}
+		move(data);
+		task.application.onDrag?.(event, data);
+	};
 
 	const onResize: RndResizeCallback = (
 		event,
 		direction,
 		ref,
 		delta,
-		position
+		position,
 	) => {
-		setSize({
-			width: ref.style.width,
-			height: ref.style.height
-		})
-		task.application?.onResize &&
-			task.application?.onResize(event, direction, ref, delta, position)
-	}
+		resize({
+			width: Number(ref.style.width),
+			height: Number(ref.style.height),
+		});
+
+		task.application.onResize?.(event, direction, ref, delta, position);
+	};
 
 	return {
-		id: id,
-		title: task.application?.name,
-		icons: task.application?.icons,
-
-		active,
-		focused,
-		minimized,
-		resizable,
-		maximized,
-
-		size,
-		minSize: task.application?.minSize,
-		position,
-
-		toolWindow: task.application?.toolWindow,
-		maximizeButton: task.application?.maximizeButton,
-		minimizeButton: task.application?.minimizeButton,
-		closeButton: task.application?.closeButton,
-
-		open,
+		...window,
 		close,
 		focus,
 		minimize,
 		unminimize,
 		maximize,
 		restore,
-		move,
-		resize,
-
+		fullscreen,
+		onDrag,
 		onResize,
-		onDrag
-	}
-}
+	};
+};

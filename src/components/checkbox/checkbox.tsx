@@ -1,12 +1,12 @@
-import styles from "@styles/components/checkbox.module.scss"
-import { cn } from "@utils"
-import React, { InputHTMLAttributes, useEffect, useRef } from "react"
+import styles from "@/styles/components/checkbox.module.scss";
+import { cn } from "@/utils";
+import { forwardRef, useEffect, useRef } from "react";
 
-interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
-	invalid?: boolean
+interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+	invalid?: boolean;
 }
 
-export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 	function Checkbox(
 		{
 			value,
@@ -18,15 +18,18 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
 			required,
 			...props
 		},
-		ref
+		forwardedRef,
 	) {
-		ref = ref || useRef<HTMLInputElement>(null)
+		const inputRef = useRef<HTMLInputElement>(null);
+		const ref = forwardedRef || inputRef;
 
 		useEffect(() => {
-			const { current: checkbox } =
-				ref as React.MutableRefObject<HTMLInputElement>
-			checkbox?.setAttribute("aria-checked", checked ? "true" : "false")
-		}, [])
+			const checkbox = ref as React.MutableRefObject<HTMLInputElement>;
+			checkbox.current?.setAttribute(
+				"aria-checked",
+				checked ? "true" : "false",
+			);
+		}, [ref, checked]);
 
 		return (
 			<input
@@ -43,6 +46,6 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
 				name={value as string}
 				{...props}
 			/>
-		)
-	}
-)
+		);
+	},
+);

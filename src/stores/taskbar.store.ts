@@ -1,48 +1,53 @@
-import { proxy } from "valtio"
+import { create } from "zustand";
 
-export const taskbar = proxy({
+export const taskbar = create(() => ({
 	pinned: [
 		{
 			id: "navigator",
 			name: "Navigator",
-			icon: require("@assets/icons/internet-explorer-16x16.png")
+			icon: "msie1-4",
 		},
 		{
 			id: "outlook",
 			name: "Outlook",
-			icon: require("@assets/icons/outlook-express-16x16.png")
+			icon: "outlook_express-3",
 		},
 		{
 			id: "channels",
 			name: "Channels",
-			icon: require("@assets/icons/chm-16x16.png")
+			icon: "channels-5",
 		},
 		{
 			id: "desktop",
 			name: "Desktop",
-			icon: require("@assets/icons/desktop-16x16.png")
-		}
+			icon: "desktop_old-4",
+		},
 	],
 	icons: [
 		{
 			id: "scheduler",
-			icon: "/icons/time_and_date-1.png",
-			title: "Task Scheduler is not ready."
+			icon: "time_and_date-1",
+			title: "Task Scheduler is not ready.",
 		},
 		{
 			id: "volume",
 			title: "Volume",
-			icon: "/icons/loudspeaker_rays-1.png"
-		}
+			icon: "loudspeaker_rays-1",
+		},
 	],
 	time: {
 		time: new Date(),
-		hour12: true,
-		locale: "en-US",
-		timezone: "Africa/Casablanca"
-	}
-})
+	},
+}));
 
 setInterval(() => {
-	taskbar.time.time = new Date()
-}, 500)
+	taskbar.setState((prev) => {
+		return {
+			...prev,
+			time: {
+				...prev.time,
+				time: new Date(),
+			},
+		};
+	});
+}, 10);

@@ -1,1 +1,1 @@
-export * from "./desktop"
+export * from "./desktop";
