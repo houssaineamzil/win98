@@ -1,6 +1,6 @@
 import { useWindow } from "@/hooks";
 import { useSystem } from "@/stores/system.store";
-import styles from "@/styles/components/taskbar.module.css";
+import styles from "@/styles/components/taskbar.module.scss";
 import type { TaskType } from "@/types";
 import { cn } from "@/utils";
 import { Icon } from "../icon";

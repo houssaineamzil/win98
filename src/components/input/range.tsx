@@ -1,4 +1,4 @@
-import styles from "@/styles/components/range.module.css";
+import styles from "@/styles/components/range.module.scss";
 import { cn } from "@/utils";
 import { forwardRef } from "react";
 

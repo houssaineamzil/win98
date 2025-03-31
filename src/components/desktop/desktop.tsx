@@ -1,7 +1,7 @@
 "use client";
 
 import { useSystem } from "@/stores/system.store";
-import styles from "@/styles/components/desktop.module.css";
+import styles from "@/styles/components/desktop.module.scss";
 import type { TaskType } from "@/types";
 import { cn } from "@/utils";
 import { useEffect, useState } from "react";

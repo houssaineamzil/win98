@@ -2,7 +2,7 @@ import { cn } from "@/utils";
 import type React from "react";
 
 import { IconButton } from "@/components/button";
-import styles from "@/styles/components/window.module.css";
+import styles from "@/styles/components/window.module.scss";
 import { Icon } from "../icon";
 
 interface Props {
@@ -44,6 +44,7 @@ export const TitleBar: React.FC<Props> = ({
 			<div className={styles.controls}>
 				{!toolWindow && minimizeButton && (
 					<IconButton
+						className={styles.button}
 						icon={
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -63,6 +64,7 @@ export const TitleBar: React.FC<Props> = ({
 					maximizeButton &&
 					(maximized ? (
 						<IconButton
+							className={styles.button}
 							icon={
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -82,6 +84,7 @@ export const TitleBar: React.FC<Props> = ({
 						/>
 					) : (
 						<IconButton
+							className={styles.button}
 							icon={
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -104,6 +107,7 @@ export const TitleBar: React.FC<Props> = ({
 					))}
 				{/* {toolWindow && (
 					<IconButton
+					className={styles.button}
 						icon={
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -122,6 +126,7 @@ export const TitleBar: React.FC<Props> = ({
 				)} */}
 				{closeButton && (
 					<IconButton
+						className={styles.button}
 						icon={
 							<svg
 								xmlns="http://www.w3.org/2000/svg"

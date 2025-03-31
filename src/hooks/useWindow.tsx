@@ -10,10 +10,11 @@ export const useWindow = (task: TaskType) => {
 		const taskEntries = Object.entries(tasks);
 		const prevTask =
 			taskEntries.length > 1 ? taskEntries[taskEntries.length - 2][1].id : null;
-			const rest = Object.fromEntries(taskEntries.filter(([id]) => id !== task.id))
+		const rest = Object.fromEntries(
+			taskEntries.filter(([id]) => id !== task.id),
+		);
 
-			console.log(rest);
-			
+		console.log(rest);
 
 		useSystem.setState((state) => ({
 			...state,

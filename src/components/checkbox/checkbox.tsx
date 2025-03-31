@@ -1,4 +1,4 @@
-import styles from "@/styles/components/checkbox.module.css";
+import styles from "@/styles/components/checkbox.module.scss";
 import { cn } from "@/utils";
 import { forwardRef, useEffect, useRef } from "react";
 

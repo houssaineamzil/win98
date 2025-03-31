@@ -54,7 +54,7 @@
 		gap: 2px;
 		display: flex;
 
-		button {
+		.button {
 			width: 16px;
 			height: 16px;
 		}
@@ -122,7 +122,7 @@
 				&:active {
 					box-shadow: 1px 1px 0 gray inset, -1px -1px 0 white inset;
 
-					span {
+					.content {
 						position: relative;
 						top: 1px;
 						left: 1px;

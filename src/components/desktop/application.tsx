@@ -1,4 +1,4 @@
-import styles from "@/styles/components/desktop.module.css";
+import styles from "@/styles/components/desktop.module.scss";
 import Image from "next/image";
 
 interface Props {

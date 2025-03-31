@@ -1,6 +1,6 @@
 import { useWindow } from "@/hooks";
 import { useSystem } from "@/stores/system.store";
-import styles from "@/styles/components/window.module.css";
+import styles from "@/styles/components/window.module.scss";
 import type { TaskType } from "@/types";
 import { cn } from "@/utils";
 import { Rnd } from "react-rnd";

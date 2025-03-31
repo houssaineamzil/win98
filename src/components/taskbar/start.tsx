@@ -1,4 +1,4 @@
-import styles from "@/styles/components/taskbar.module.css";
+import styles from "@/styles/components/taskbar.module.scss";
 import { Button } from "../button";
 import { Icon } from "../icon";
 

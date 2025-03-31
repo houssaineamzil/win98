@@ -1,4 +1,4 @@
-import styles from "@/styles/components/textarea.module.css";
+import styles from "@/styles/components/textarea.module.scss";
 import { cn } from "@/utils";
 import React, { type TextareaHTMLAttributes } from "react";
 

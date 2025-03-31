@@ -1,4 +1,4 @@
-import styles from "@/styles/components/taskbar.module.css";
+import styles from "@/styles/components/taskbar.module.scss";
 import { Pinned } from "./pinned";
 import { Start } from "./start";
 import { Tasks } from "./tasks";

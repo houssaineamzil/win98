@@ -23,7 +23,7 @@
 		grid-template-rows: repeat(12, 70px);
 		grid-template-columns: repeat(23, 60px);
 
-		.icon {
+		.app {
 			gap: 3px;
 			width: 60px;
 			height: 70px;
@@ -35,7 +35,7 @@
 			flex-direction: column;
 
 			&.focus {
-				img {
+				.icon {
 					opacity: 80%;
 					filter: grayscale(25%);
 				}

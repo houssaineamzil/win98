@@ -1,4 +1,4 @@
-import styles from "@/styles/components/radio.module.css";
+import styles from "@/styles/components/radio.module.scss";
 import { cn } from "@/utils";
 import { forwardRef } from "react";
 

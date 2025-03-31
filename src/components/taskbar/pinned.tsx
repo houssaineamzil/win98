@@ -1,5 +1,5 @@
 import { taskbar } from "@/stores/taskbar.store";
-import styles from "@/styles/components/taskbar.module.css";
+import styles from "@/styles/components/taskbar.module.scss";
 import { Icon } from "../icon";
 
 export const Pinned: React.FC = () => {

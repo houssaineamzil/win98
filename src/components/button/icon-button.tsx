@@ -1,7 +1,7 @@
 import { cn } from "@/utils";
 import { forwardRef } from "react";
 
-import styles from "@/styles/components/button.module.css";
+import styles from "@/styles/components/button.module.scss";
 import { Button } from "./button";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

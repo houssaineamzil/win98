@@ -1,7 +1,7 @@
-import { taskbar } from "@/stores/taskbar.store";
-import styles from "@/styles/components/taskbar.module.css";
-import { Icon } from "../icon";
 import { useSystem } from "@/stores/system.store";
+import { taskbar } from "@/stores/taskbar.store";
+import styles from "@/styles/components/taskbar.module.scss";
+import { Icon } from "../icon";
 
 export const Tray: React.FC = () => {
 	const { icons, time } = taskbar();

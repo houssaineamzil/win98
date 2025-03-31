@@ -1,6 +1,6 @@
 import { Applications } from "@/constants/shared";
 import { useSystem } from "@/stores/system.store";
-import styles from "@/styles/components/desktop.module.css";
+import styles from "@/styles/components/desktop.module.scss";
 import type { ApplicationType } from "@/types";
 import { cn, uid } from "@/utils";
 import { Window } from "@/utils/window";
@@ -70,10 +70,10 @@ export const App: React.FC<{ application: ApplicationType }> = ({
 			type="button"
 			title={application.name}
 			onClick={focus}
-			className={cn(styles.icon, { [styles.focus]: isFocus })}
+			className={cn(styles.app, { [styles.focus]: isFocus })}
 			onDoubleClick={open}
 		>
-			<Icon name={application.icon} />
+			<Icon name={application.icon} className={styles.icon} />
 			<div className={styles.name}>{application.name}</div>
 		</button>
 	);

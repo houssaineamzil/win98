@@ -1,4 +1,4 @@
-import styles from "@/styles/components/input.module.css";
+import styles from "@/styles/components/input.module.scss";
 import { cn } from "@/utils";
 import React, { type InputHTMLAttributes } from "react";
 import { Icon } from "../icon";
