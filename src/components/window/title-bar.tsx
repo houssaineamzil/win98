@@ -72,15 +72,15 @@ export const TitleBar: React.FC<Props> = ({
 									height="9"
 									fill="none"
 								>
-									<title>Minimize Button</title>
+									<title>Restore Button</title>
 									<path
 										fill="#000"
 										d="M2 0h6v2H2zM7 2h1v4H7zM2 2h1v1H2zM6 5h1v1H6zM0 3h6v2H0zM5 5h1v4H5zM0 5h1v4H0zM1 8h4v1H1z"
 									/>
 								</svg>
 							}
-							onClick={maximize}
-							aria-label="Maximize"
+							onClick={restore}
+							aria-label="Restore"
 						/>
 					) : (
 						<IconButton
@@ -92,7 +92,7 @@ export const TitleBar: React.FC<Props> = ({
 									height="8"
 									fill="none"
 								>
-									<title>Restore Button</title>
+									<title>Minimize Button</title>
 									<path
 										fillRule="evenodd"
 										clipRule="evenodd"
@@ -101,8 +101,8 @@ export const TitleBar: React.FC<Props> = ({
 									/>
 								</svg>
 							}
-							onClick={restore}
-							aria-label="Restore"
+							onClick={maximize}
+							aria-label="Maximize"
 						/>
 					))}
 				{/* {toolWindow && (

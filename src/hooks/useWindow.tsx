@@ -4,24 +4,24 @@ import { useSystem } from "@/stores/system.store";
 import type { RndDragCallback, RndResizeCallback } from "react-rnd";
 
 export const useWindow = (task: TaskType) => {
-	const { tasks } = useSystem();
+	const { tasks, activeTask } = useSystem();
 	const window = task.window;
 	const close = () => {
-		const taskEntries = Object.entries(tasks);
-		const prevTask =
-			taskEntries.length > 1 ? taskEntries[taskEntries.length - 2][1].id : null;
 		const rest = Object.fromEntries(
-			taskEntries.filter(([id]) => id !== task.id),
+			Object.entries(tasks).filter(([id]) => id !== task.id),
 		);
-
-		console.log(rest);
 
 		useSystem.setState((state) => ({
 			...state,
 			tasks: rest,
-			activeTask: prevTask || null,
+			activeTask:
+				Object.values(tasks)[Object.keys(tasks).indexOf(task.id) - 1]?.id ??
+				null,
 		}));
 	};
+
+	const active = activeTask === task.id;
+	const minimized = window.minimized || false;
 
 	const focus = () => {
 		useSystem.setState((state) => ({
@@ -41,26 +41,23 @@ export const useWindow = (task: TaskType) => {
 	};
 
 	const minimize = () => {
-		if (!window.minimized) {
-			useSystem.setState((state) => ({
-				...state,
-				tasks: {
-					...state.tasks,
-					[task.id]: {
-						...task,
-						window: {
-							...window,
-							active: false,
-							minimized: true,
-						},
+		useSystem.setState((state) => ({
+			...state,
+			tasks: {
+				...state.tasks,
+				[task.id]: {
+					...task,
+					window: {
+						...window,
+						active: false,
+						minimized: true,
 					},
 				},
-				activeTask:
-					tasks[
-						Object.keys(tasks).findIndex((key) => tasks[key].id === task.id) - 1
-					].id || null,
-			}));
-		}
+			},
+			activeTask:
+				Object.values(tasks)[Object.keys(tasks).indexOf(task.id) - 1]?.id ??
+				null,
+		}));
 	};
 
 	const unminimize = () => {
@@ -84,6 +81,7 @@ export const useWindow = (task: TaskType) => {
 	};
 
 	const maximize = () => {
+		console.log("Maximizing window", task.id);
 		if (!window.maximized) {
 			useSystem.setState((state) => ({
 				...state,
@@ -145,10 +143,7 @@ export const useWindow = (task: TaskType) => {
 		}));
 	};
 
-	const resize = (size: {
-		width: number;
-		height: number;
-	}) => {
+	const resize = (size: { width: number; height: number }) => {
 		if (task.application.resizable && window.resizable)
 			useSystem.setState((state) => ({
 				...state,
@@ -212,10 +207,12 @@ export const useWindow = (task: TaskType) => {
 
 	return {
 		...window,
+		active,
 		close,
 		focus,
 		minimize,
 		unminimize,
+		minimized,
 		maximize,
 		restore,
 		fullscreen,
