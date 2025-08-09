@@ -1,0 +1,48 @@
+.root {
+	border: none;
+	color: inherit;
+	font: inherit;
+	cursor: pointer;
+
+	display: flex;
+	position: relative;
+
+	width: 16px;
+	height: 16px;
+	appearance: none;
+	place-content: center;
+
+	&::before {
+		content: "";
+		inset: 0;
+		position: absolute;
+		background: url("/icons/radio/base.svg") center no-repeat;
+	}
+
+	&:checked {
+		&::after {
+			content: "";
+			inset: 0;
+			position: absolute;
+			background: url("/icons/radio/dot.svg") center no-repeat;
+		}
+	}
+
+	&:disabled {
+		&::before {
+			content: "";
+			inset: 0;
+			position: absolute;
+			background: url("/icons/radio/base-disabled.svg") center no-repeat;
+		}
+
+		&:checked {
+			&::after {
+				content: "";
+				inset: 0;
+				position: absolute;
+				background: url("/icons/radio/dot-disabled.svg") center no-repeat;
+			}
+		}
+	}
+}

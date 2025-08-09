@@ -1,0 +1,187 @@
+.window {
+	display: flex;
+	color: black;
+	padding: 2px 3px 4px;
+	background: silver;
+	flex-direction: column;
+	box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff;
+
+	&.active {
+		z-index: 50;
+
+		.titleBar {
+			background: linear-gradient(90deg, navy, #1084d0);
+
+			.icon {
+				filter: none;
+			}
+		}
+	}
+
+	.content {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		background: white;
+		color: black;
+		min-width: 0;
+		min-height: 0;
+
+		border-style: solid;
+		border-width: 1px;
+		border-color: gray white white gray;
+
+		position: relative;
+		border-image: url("data:image/svg+xml,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22256px%22%20height%3D%22256px%22%20viewBox%3D%220%200%20256%20256%22%3E%0A%09%09%09%0A%09%09%3Cpath%20d%3D%22M0%200h224v32h-192v192h-32v-224z%22%20fill%3D%22%20rgb(0%2C%200%2C%200)%22%2F%3E%0A%09%09%3Cpath%20d%3D%22M224%200h32v256h-256v-32h224v-224z%22%20fill%3D%22%20rgb(255%2C%20255%2C%20255)%22%2F%3E%0A%09%09%3Cpath%20d%3D%22M32%2032h160v32h-128v128h-32v-160z%22%20fill%3D%22%20rgb(128%2C%20128%2C%20128)%22%2F%3E%0A%09%09%3Cpath%20d%3D%22M192%2032h32v192h-192v-32h160v-160z%22%20fill%3D%22%20rgb(223%2C%20223%2C%20223)%22%2F%3E%0A%09%09%3Cpath%20d%3D%22M64%2064h128v128h-128v-128z%22%20fill%3D%22%20rgb(192%2C%20192%2C%20192)%22%2F%3E%0A%09%0A%09%09%3C%2Fsvg%3E") 64 / 2px;
+		border-color: gray;
+		border-style: solid;
+		border-width: 2px;
+	}
+}
+
+.titleBar {
+	display: flex;
+	align-items: center;
+	padding: 3px 2px 3px 3px;
+	justify-content: space-between;
+	background: linear-gradient(90deg, grey, #b5b5b5);
+
+	.titleWrapper {
+		gap: 6px;
+		display: flex;
+
+		.icon {
+			width: 16px;
+			height: 16px;
+			filter: grayscale(1);
+		}
+
+		.title {
+			color: #fff;
+			line-height: 16px;
+			margin-right: 24px;
+		}
+	}
+
+	.controls {
+		gap: 2px;
+		display: flex;
+
+		.button {
+			width: 16px;
+			height: 16px;
+		}
+	}
+}
+
+.toolBars {
+	padding: 1px;
+	display: flex;
+	flex-direction: column;
+	margin-block: 1px 5px;
+	border: 1px solid gray;
+	box-shadow: 0 1px 0 white, 0 1px 0 white inset;
+
+	.toolbar {
+		/* margin: 2px; */
+		display: flex;
+		overflow: hidden;
+		position: relative;
+		flex-direction: row;
+		align-items: center;
+		/* border: 1px solid gray; */
+	}
+
+	.dragHandle {
+		width: 10px;
+		flex: 0 0 auto;
+		position: relative;
+		touch-action: none;
+		align-self: stretch;
+		box-sizing: border-box;
+
+		&::before {
+			content: "";
+			display: block;
+			position: absolute;
+			left: 2px;
+			top: 2px;
+			width: 4px;
+			bottom: 1px;
+			border: 1px solid;
+			box-sizing: border-box;
+			border-color: white gray gray white;
+		}
+	}
+
+	.menus {
+		flex: 0 0 auto;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		.button {
+			outline: 0;
+			height: 18px;
+			line-height: 1;
+			padding: 2px 5px;
+			margin-block: 1px;
+			background: silver;
+			box-sizing: border-box;
+
+			&:hover {
+				box-shadow: 1px 1px 0 white inset, -1px -1px 0 gray inset;
+
+				&:active {
+					box-shadow: 1px 1px 0 gray inset, -1px -1px 0 white inset;
+
+					.content {
+						position: relative;
+						top: 1px;
+						left: 1px;
+					}
+				}
+			}
+
+			.hotkey {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+.statusBar {
+	gap: 2px;
+	padding-top: 3px;
+	display: flex;
+	align-items: center;
+
+	.field {
+		gap: 4px;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		padding-inline: 3px;
+		align-items: center;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		pointer-events: none;
+		user-select: none;
+
+		border: 1px solid;
+		border-color: gray white white gray;
+
+		&.left {
+			width: 250px;
+		}
+
+		&.middle {
+			width: 100%;
+		}
+
+		&.right {
+			width: 250px;
+		}
+	}
+}

@@ -1,0 +1,35 @@
+.root {
+	padding: 4px;
+	font: inherit;
+	color: black;
+	max-width: 100%;
+	max-height: 100%;
+	box-shadow:
+		inset -1px -1px 0px white,
+		inset 1px 1px 0px black,
+		inset -2px -2px 0px whitesmoke,
+		inset 2px 2px 0px gray;
+
+	&:focus-visible {
+		outline-offset: -4px;
+		outline: 1px dotted black;
+	}
+
+	&::placeholder {
+		color: gray;
+		text-shadow: 1px 1px 0 white;
+	}
+
+	&:disabled {
+		color: gray;
+		background: silver;
+		text-shadow: 1px 1px 0 white;
+		box-shadow: inset -1px -1px white, inset 1px 1px grey, inset -2px -2px
+			lightgray, inset 2px 2px black;
+
+		&::placeholder {
+			color: gray;
+			text-shadow: 1px 1px 0 white;
+		}
+	}
+}

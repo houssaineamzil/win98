@@ -1,0 +1,58 @@
+.root {
+	display: flex;
+	width: 100dvw;
+	position: relative;
+	height: calc(100dvh - 38px);
+
+	.wallpaper {
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		pointer-events: none;
+	}
+
+	.view {
+		gap: 2px;
+		width: 100%;
+		height: 100%;
+		display: grid;
+		padding-block: 4px;
+		justify-items: center;
+		grid-auto-flow: column;
+		grid-template-rows: repeat(12, 70px);
+		grid-template-columns: repeat(23, 60px);
+
+		.app {
+			gap: 3px;
+			width: 60px;
+			height: 70px;
+			padding: 4px;
+			display: flex;
+			color: black;
+			position: relative;
+			align-items: center;
+			flex-direction: column;
+
+			&.focus {
+				.icon {
+					opacity: 80%;
+					filter: grayscale(25%);
+				}
+
+				.name {
+					background: navy;
+					border: 1px dashed white;
+					color: white;
+				}
+			}
+
+			.name {
+				text-wrap: wrap;
+				font-size: 13px;
+				line-height: 100%;
+				padding-inline: 5px;
+			}
+		}
+	}
+}

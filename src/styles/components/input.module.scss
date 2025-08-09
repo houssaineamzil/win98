@@ -1,0 +1,48 @@
+.root {
+	border: none;
+	font: inherit;
+	cursor: pointer;
+
+	gap: 4px;
+	display: flex;
+	color: black;
+	align-items: center;
+	background: white;
+	justify-content: center;
+	box-shadow:
+		inset -1px -1px 0px white,
+		inset 1px 1px 0px black,
+		inset -2px -2px 0px whitesmoke,
+		inset 2px 2px 0px gray;
+
+	.icon {
+		padding: 4px;
+	}
+
+	&:focus-visible {
+		outline-offset: -4px;
+		outline: 1px dotted black;
+	}
+
+	.disabled {
+		color: gray;
+		cursor: default;
+		text-shadow: 1px 1px 0 white;
+		box-shadow:
+			inset -1px -1px 0px white,
+			inset 1px 1px 0px black,
+			inset -2px -2px 0px whitesmoke,
+			inset 2px 2px 0px gray;
+
+		&::placeholder {
+			color: gray;
+			text-shadow: 1px 1px 0 white;
+		}
+	}
+
+	input {
+		padding: 4px;
+		width: calc(100% - 4px);
+		height: calc(100% - 4px);
+	}
+}

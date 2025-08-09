@@ -1,0 +1,14 @@
+.root {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	min-width: max-content;
+	z-index: auto;
+
+	.content {
+		text-wrap: nowrap;
+		background: ivory;
+		border: 1px solid black;
+		padding-inline: 4px;
+	}
+}
