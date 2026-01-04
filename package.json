@@ -1,37 +1,37 @@
 {
-	"name": "win98",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"check": "biome check --fix --unsafe",
-		"build": "next build",
-		"start": "next start",
-		"lint": "biome lint",
-		"lint:fix": "biome lint --fix",
-		"format": "biome format --fix",
-		"clean": "rm -r .next && bun run check"
-	},
-	"dependencies": {
-		"clsx": "^2.1.1",
-		"next": "15.2.4",
-		"react": "^19.1.0",
-		"react-dom": "^19.1.0",
-		"react-rnd": "^10.5.2",
-		"sass": "^1.89.1",
-		"tailwind-merge": "^3.3.0",
-		"zustand": "^5.0.5"
-	},
-	"devDependencies": {
-		"@tailwindcss/postcss": "^4.1.8",
-		"@biomejs/biome": "^1.9.4",
-		"@types/node": "^22.15.29",
-		"@types/react": "^19.1.6",
-		"@types/react-dom": "^19.1.5",
-		"eslint": "^9.28.0",
-		"eslint-config-next": "15.2.4",
-		"postcss": "^8.5.4",
-		"tailwindcss": "^4.1.8",
-		"typescript": "^5.8.3"
-	}
+  "name": "win98",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "check": "biome check --fix --unsafe",
+    "build": "next build",
+    "start": "next start",
+    "lint": "biome lint",
+    "lint:fix": "biome lint --fix",
+    "format": "biome format --fix",
+    "clean": "rm -r .next && bun run check"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "next": "15.2.8",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-rnd": "^10.5.2",
+    "sass": "^1.89.1",
+    "tailwind-merge": "^3.3.0",
+    "zustand": "^5.0.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.8",
+    "@biomejs/biome": "^1.9.4",
+    "@types/node": "^22.15.29",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.5",
+    "eslint": "^9.28.0",
+    "eslint-config-next": "15.2.4",
+    "postcss": "^8.5.4",
+    "tailwindcss": "^4.1.8",
+    "typescript": "^5.8.3"
+  }
 }
