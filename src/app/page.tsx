@@ -5,24 +5,30 @@ import { useEffect } from "react";
 
 import { Desktop } from "@/components/desktop";
 import { Taskbar } from "@/components/taskbar";
+import { startTaskbarTimer, stopTaskbarTimer } from "@/stores/taskbar.store";
+
+const preventContextMenu = (event: MouseEvent) => event.preventDefault();
 
 const Page: NextPage = () => {
-	useEffect(() => {
-		window.addEventListener("contextmenu", (event) => event.preventDefault());
+  useEffect(() => {
+    // Start taskbar timer on mount
+    startTaskbarTimer();
 
-		return () => {
-			window.removeEventListener("contextmenu", (event) =>
-				event.preventDefault(),
-			);
-		};
-	}, []);
+    // Prevent context menu (right click)
+    document.addEventListener("contextmenu", preventContextMenu);
 
-	return (
-		<>
-			<Desktop />
-			<Taskbar />
-		</>
-	);
+    return () => {
+      stopTaskbarTimer();
+      document.removeEventListener("contextmenu", preventContextMenu);
+    };
+  }, []);
+
+  return (
+    <>
+      <Desktop />
+      <Taskbar />
+    </>
+  );
 };
 
 export default Page;

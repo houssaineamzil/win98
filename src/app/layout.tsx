@@ -3,20 +3,20 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
-	title: "Windows 98",
-	description: "Created by Houssaine Amzil",
+  title: "Windows 98",
+  description: "Created by Houssaine Amzil",
 };
 
 const RootLayout = async ({
-	children,
+  children,
 }: Readonly<{
-	children: React.ReactNode;
+  children: React.ReactNode;
 }>) => {
-	return (
-		<html lang="en">
-			<body>{children}</body>
-		</html>
-	);
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
 };
 
 export default RootLayout;

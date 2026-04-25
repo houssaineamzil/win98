@@ -5,15 +5,15 @@ import { Tasks } from "./tasks";
 import { Tray } from "./tray";
 
 export const Taskbar: React.FC = () => {
-	return (
-		<div className={styles.root}>
-			<Start />
-			<div className={styles.divider} />
-			<Pinned />
-			<div className={styles.divider} />
-			<Tasks />
-			<div className={styles.divider} />
-			<Tray />
-		</div>
-	);
+  return (
+    <div className={styles.root}>
+      <Start />
+      <div className={styles.divider} />
+      <Pinned />
+      <div className={styles.divider} />
+      <Tasks />
+      <div className={styles.divider} />
+      <Tray />
+    </div>
+  );
 };
