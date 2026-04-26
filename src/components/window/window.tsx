@@ -34,6 +34,7 @@ export const Window: React.FC<{ task: TaskType; index: number }> = ({
       className={cn(styles.window, {
         [styles.active]: window.active,
       })}
+      onMouseDown={window.focus}
       onDrag={window.onDrag}
       onResize={window.onResize}
       size={window.size}

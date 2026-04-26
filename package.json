@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "check": "biome check --fix --unsafe",
+    "check": "biome check",
     "build": "next build",
     "start": "next start",
     "lint": "biome lint",
-    "lint:fix": "biome lint --fix",
     "format": "biome format --fix",
     "clean": "rm -r .next && bun run check"
   },
