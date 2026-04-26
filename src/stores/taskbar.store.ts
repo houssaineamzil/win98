@@ -12,12 +12,12 @@ interface PinnedApp {
 }
 
 interface TaskbarState {
-	pinned: Array<PinnedApp>;
+  pinned: Array<PinnedApp>;
   icons: Array<{
-		id: string;
+    id: string;
     icon: string;
     title: string;
-		tooltip?: string;
+    tooltip?: string;
   }>;
   time: Date;
 }

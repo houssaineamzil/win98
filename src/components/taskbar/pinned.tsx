@@ -64,7 +64,7 @@ export const Pinned: React.FC = () => {
     <div className={styles.pinned}>
       {pinned.map((app) => {
         return (
-          <Tooltip key={app.id} content={app.tooltip||app.name}>
+          <Tooltip key={app.id} content={app.tooltip || app.name}>
             <button
               type="button"
               className={styles.pinnedApp}

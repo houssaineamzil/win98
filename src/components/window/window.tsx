@@ -4,6 +4,7 @@ import { useWindow } from "@/hooks";
 import styles from "@/styles/components/window.module.scss";
 import type { TaskType } from "@/types";
 import { cn } from "@/utils";
+import { ComponentRenderer } from "../component-renderer";
 import { Icon } from "../icon";
 import { StatusBar } from "./status-bar";
 import { TitleBar } from "./title-bar";
@@ -50,7 +51,17 @@ export const Window: React.FC<{ task: TaskType; index: number }> = ({
     >
       <TitleBar {...window} />
       <ToolBars />
-      <div className={styles.content}>{task.application.content}</div>
+      <div className={styles.content}>
+        {task.application.component ? (
+          <ComponentRenderer
+            component={task.application.component}
+            data={task.application.data as Record<string, unknown>}
+            onClose={window.close}
+          />
+        ) : (
+          task.application.content
+        )}
+      </div>
       <StatusBar
         right={
           <>

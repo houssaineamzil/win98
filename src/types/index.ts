@@ -22,6 +22,10 @@ export interface ApplicationType {
 
   content: React.ReactNode;
 
+  // Component-based application properties
+  component?: string;
+  data?: Record<string, unknown>;
+
   onResize?: RndResizeCallback;
   onDrag?: RndDragCallback;
 }

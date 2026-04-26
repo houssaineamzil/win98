@@ -1,0 +1,30 @@
+.root {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 32px;
+	gap: 16px;
+	text-align: center;
+	height: 100%;
+	background: #c0c0c0;
+
+	.icon {
+		font-size: 32px;
+	}
+
+	.message {
+		font-family: "MS Sans Serif", "Segoe UI", sans-serif;
+		font-size: 12px;
+		line-height: 1.5;
+		color: black;
+
+		p {
+			margin: 0 0 8px 0;
+		}
+	}
+
+	.actions {
+		margin-top: 8px;
+	}
+}
