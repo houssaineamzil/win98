@@ -44,6 +44,7 @@ export const Applications = {
       x: 150,
       y: 150,
     },
-    content: <div />,
+    component: "Notepad",
+    content: null,
   },
 };

@@ -1,5 +1,21 @@
 import type { RndDragCallback, RndResizeCallback } from "react-rnd";
 
+// Menu item types for window menus
+export interface MenuItem {
+  label: string;
+  hotkey?: string;
+  disabled?: boolean;
+  divider?: boolean;
+  onClick?: () => void;
+  submenu?: MenuItem[];
+}
+
+export interface MenuBar {
+  label: string;
+  hotkey?: string;
+  items?: MenuItem[];
+}
+
 export interface ApplicationType {
   name: string;
   description: string;
@@ -25,6 +41,10 @@ export interface ApplicationType {
   // Component-based application properties
   component?: string;
   data?: Record<string, unknown>;
+
+  // Window menu customization
+  menu?: MenuBar[];
+  hideDefaultMenus?: boolean;
 
   onResize?: RndResizeCallback;
   onDrag?: RndDragCallback;

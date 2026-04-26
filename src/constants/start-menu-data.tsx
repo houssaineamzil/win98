@@ -1,6 +1,4 @@
-import { ApplicationsEnum } from "@/stores/system.store";
 import type { ApplicationType } from "@/types";
-import { Applications } from "./shared";
 
 export interface MenuItemData {
   title: string;
@@ -47,7 +45,7 @@ const accessories: MenuItemData[] = [
   {
     title: "Notepad",
     icon: "notepad-0",
-    application: Applications[ApplicationsEnum.NOTEPAD],
+    component: "Notepad",
     multiInstance: true,
   },
   {
@@ -231,7 +229,7 @@ export const startMenuData: MenuItemData[] = [
   {
     title: "Run...",
     icon: "executable-1",
-    application: Applications[ApplicationsEnum.NOTEPAD],
+    component: "Notepad",
   },
   { divider: true, icon: "", title: "" },
   {

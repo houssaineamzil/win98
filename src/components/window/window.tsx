@@ -8,7 +8,7 @@ import { ComponentRenderer } from "../component-renderer";
 import { Icon } from "../icon";
 import { StatusBar } from "./status-bar";
 import { TitleBar } from "./title-bar";
-import { ToolBars } from "./tool-bars";
+import { WindowMenu } from "./window-menu";
 
 export const Window: React.FC<{ task: TaskType; index: number }> = ({
   task,
@@ -50,7 +50,7 @@ export const Window: React.FC<{ task: TaskType; index: number }> = ({
       bounds="parent"
     >
       <TitleBar {...window} />
-      <ToolBars />
+      <WindowMenu menus={task.application.menu} onCloseWindow={window.close} />
       <div className={styles.content}>
         {task.application.component ? (
           <ComponentRenderer

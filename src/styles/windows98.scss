@@ -1,0 +1,584 @@
+@import url("windows-default.css");
+
+%
+checkerboard {
+  background: var(--checker) repeat;
+  image-rendering: pixelated;
+}
+%
+font {
+  font-family: "Segoe UI", sans-serif;
+  font-size: 12px;
+}
+%
+button-face {
+  background-color: var(--ButtonFace);
+  color: var(--ButtonText);
+}
+%
+inset-shallow {
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--ButtonShadow) var(--ButtonHilight) var(--ButtonHilight)
+    var(--ButtonShadow);
+  @extend %button-face;
+}
+%
+outset-shallow {
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--ButtonHilight) var(--ButtonShadow) var(--ButtonShadow)
+    var(--ButtonHilight);
+  @extend %button-face;
+}
+%
+inset-deep {
+  @extend %inset-shallow; /* as fallback */
+  position: relative; /* for pseudo element(s) */
+  border-image: var(--inset-deep-border-image);
+}
+%
+outset-deep {
+  @extend %outset-shallow; /* as fallback */
+  position: relative; /* for pseudo element(s) */
+  border-image: var(--button-normal-border-image);
+}
+%
+outset-deep {
+  border-color: var(--ButtonLight) var(--ButtonShadow) var(--ButtonShadow)
+    var(--ButtonLight);
+  border-style: solid;
+  border-width: 2px 2px;
+}
+%
+inset-deep {
+  border-color: var(--ButtonShadow);
+  border-style: solid;
+  border-width: 2px 2px;
+}
+
+%
+outset-deep-2 {
+  background-color: var(--ButtonFace);
+  border-top: 1px solid var(--ButtonFace);
+  border-left: 1px solid var(--ButtonFace);
+  border-right: 1px solid var(--ButtonDkShadow);
+  border-bottom: 1px solid var(--ButtonDkShadow);
+  box-shadow:
+    1px 1px 0 var(--ButtonHilight) inset,
+    -1px -1px 0 var(--ButtonShadow) inset;
+}
+
+.inset-deep {
+  @extend %inset-deep;
+}
+.outset-deep {
+  @extend %outset-deep;
+}
+.inset-shallow {
+  @extend %inset-shallow;
+}
+.outset-shallow {
+  @extend %outset-shallow;
+}
+
+button {
+  @extend %button-face;
+}
+button:not(.lightweight) {
+  outline: none; /* replaced with inner dotted focus ring (which is admittedly not so prominent...) */
+  @extend %outset-deep;
+  border-image: var(--button-normal-border-image);
+}
+button:not(.lightweight).default {
+  border-image: var(--button-default-border-image);
+}
+button:not(.lightweight):enabled:hover:active {
+  border-image: var(--button-active-border-image);
+}
+button:not(.lightweight).default:enabled:hover:active {
+  border-image: var(--button-default-active-border-image);
+}
+
+/* TODO: offset content on press! */
+/* (this would need a child ELEMENT, wouldn't work with text nodes as direct descendants:) */
+/*button:active > * {
+	position: relative;
+	left: 1px;
+	top: 1px;
+}
+*/
+/* also, this is more complicated; see Paint; the tool buttons translate when being pushed and when depressed, and these add together */
+/* omg, a thought... what if I used feDisplacementMap SVG filter... */
+
+button:not(.lightweight):focus::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  border: 1px dotted var(--ButtonDkShadow); /* ?? */
+  /* TODO: get exact inset dimensions, and have corners without dots ideally */
+  /* (could use outline instead of ::before at this point) */
+}
+button.lightweight {
+  outline: none; /* these buttons are not usually keyboard accessible, or the focus it shown just by inset (menu buttons) */
+
+  border-style: solid;
+  border-width: 1px;
+  border-color: transparent;
+}
+/* TODO: recommend preventing focus on click for lightweight buttons */
+button.lightweight:enabled:hover /*,
+button.lightweight:focus */ {
+  @extend %outset-shallow;
+}
+button.lightweight:enabled:hover:active,
+button.lightweight.pressing,
+button.lightweight.pressed {
+  @extend %inset-shallow;
+}
+button:disabled {
+  color: var(--GrayText);
+  text-shadow: 1px 1px 0px var(--ButtonHilight);
+}
+button:not(.lightweight).toggle:enabled:hover:active,
+button:not(.lightweight).pressing {
+  @extend %inset-deep;
+}
+button:not(
+    .lightweight
+  ).toggle.selected /* @TODO: deprecate/remove .toggle API, use .pressed instead */,
+button:not(.lightweight).pressed {
+  @extend %inset-deep;
+  @extend %checkerboard;
+}
+
+.os-window .window-titlebar,
+body > .window-titlebar {
+  background: var(--ActiveTitle);
+  background: linear-gradient(
+    to right,
+    var(--ActiveTitle) 0%,
+    var(--GradientActiveTitle) 100%
+  );
+
+  color: var(--TitleText);
+  @extend %font;
+}
+.os-window.rtl .window-titlebar {
+  background: linear-gradient(
+    to left,
+    var(--ActiveTitle) 0%,
+    var(--GradientActiveTitle) 100%
+  );
+}
+.os-window:not(.tool-window) .window-titlebar,
+body > .window-titlebar {
+  font-weight: bold;
+}
+.os-window:not(.focused) .window-titlebar {
+  background: darkgray;
+  background: linear-gradient(
+    to right,
+    var(--InactiveTitle) 0%,
+    var(--GradientInactiveTitle) 100%
+  );
+
+  color: var(--InactiveTitleText);
+}
+.os-window.rtl:not(.focused) .window-titlebar {
+  background: linear-gradient(
+    to left,
+    var(--InactiveTitle) 0%,
+    var(--GradientInactiveTitle) 100%
+  );
+}
+.os-window {
+  /* Needed for when maximized, otherwise would be provided by %outset-deep */
+  background: var(--ButtonFace);
+
+  /* background: var(--Window); */
+  /*color: var(--WindowText);*/
+  /*border: 1px solid var(--WindowFrame);*/
+  /* TODO: use window-specific theme colors; also different types of windows */
+}
+.os-window:not(.maximized) {
+  @extend %outset-deep;
+  padding: 2px;
+}
+
+.window-button {
+  display: block;
+  width: 16px;
+  height: 14px;
+  padding: 0;
+  margin: 2px 0;
+}
+.window-button-icon {
+  display: block;
+  /* background-image: url("images/titlebar-buttons.png"); */
+  --sprite-image: url("images/titlebar-buttons.png");
+  --sprite-y: 0;
+  image-rendering: pixelated;
+  width: 12px;
+  height: 10px;
+  position: relative;
+  pointer-events: none;
+}
+.os-window .window-button:enabled:hover:active .window-button-icon,
+.os-window .window-button.pressing .window-button-icon {
+  top: 1px;
+  left: 1px;
+}
+.window-button:disabled .window-button-icon {
+  /* filter: saturate(0%) opacity(50%); fallback */
+  /* filter: url("#os-gui-black-to-inset-filter"); */
+}
+.window-button .window-button-icon::before,
+.window-button .window-button-icon::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  mask-image: var(--sprite-image);
+  mask-position: var(--sprite-x) var(--sprite-y);
+  -webkit-mask-image: var(--sprite-image);
+  -webkit-mask-position: var(--sprite-x) var(--sprite-y);
+  background-color: var(--ButtonText);
+}
+.window-button:disabled .window-button-icon::before {
+  background-color: var(--ButtonHilight);
+  left: 1px;
+  top: 1px;
+}
+.window-button:enabled .window-button-icon::after {
+  display: none;
+}
+.window-button:disabled .window-button-icon::after {
+  background-color: var(--GrayText);
+}
+.window-action-close .window-button-icon {
+  --sprite-x: calc(-3 * 13px - 1px);
+}
+.window-action-maximize .window-button-icon {
+  --sprite-x: calc(-1 * 13px - 1px);
+}
+.window-action-restore .window-button-icon {
+  --sprite-x: calc(-2 * 13px - 1px);
+}
+.window-action-minimize .window-button-icon {
+  --sprite-x: calc(-0 * 13px - 1px);
+}
+.window-close-button {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+.os-window.tool-window .window-close-button {
+  width: 11px;
+  height: 11px;
+}
+.os-window.tool-window .window-close-button .window-button-icon {
+  width: 7px;
+  height: 7px;
+  --sprite-x: 7px;
+}
+.os-window .window-title-area {
+  height: 16px;
+}
+.os-window.tool-window .window-title-area {
+  height: 14px;
+}
+.os-window .window-titlebar {
+  height: 18px;
+}
+.os-window.tool-window .window-titlebar {
+  height: 15px;
+}
+.os-window .window-title {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: inline-block !important;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 2px;
+}
+
+.menus {
+  background: var(--Menu);
+  color: var(--MenuText);
+}
+.os-window:not(.focused) .menus {
+  color: var(--GrayText);
+}
+.menus *,
+.menu-popup * {
+  @extend %font;
+}
+.menu-button {
+  box-sizing: border-box;
+  height: 18px;
+  line-height: 1;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 2px 5px;
+  outline: 0;
+  /* @extend button.lightweight; */
+  background: var(--Menu);
+}
+/* Note: In Windows 98, normal menu bars have an inset highlight if you use Esc and then the arrow keys,
+whereas Explorer's menu bars are outset and match the hover effect, which I feel makes more sense,
+so I think I'll imitate that. (I might change it later) */
+/* Also, to prevent duplicate highlight (via keyboard + mouse), and lingering highlight with touch, I'm using a class, rather than :hover/:focus/:active */
+.menu-button.highlight {
+  box-shadow:
+    1px 1px 0 var(--ButtonHilight) inset,
+    -1px -1px 0 var(--ButtonShadow) inset;
+}
+.menu-button.highlight.active {
+  box-shadow:
+    1px 1px 0 var(--ButtonShadow) inset,
+    -1px -1px 0 var(--ButtonHilight) inset;
+}
+.menu-button.highlight.active > span {
+  position: relative;
+  top: 1px;
+  left: 1px;
+}
+
+.menu-popup {
+  display: block;
+  padding: 2px;
+  @extend %outset-deep-2;
+  background: var(--Menu);
+  color: var(--MenuText);
+}
+.menu-popup td {
+  padding: 0 1px;
+}
+.menu-item {
+  padding: 1px 3px;
+  margin: 2px;
+  height: 17px;
+}
+.menu-item[disabled] {
+  color: var(--GrayText);
+  text-shadow: 0.8px 0.8px 0px var(--ButtonHilight);
+}
+.menu-item.highlight:not([disabled]),
+.menu-item.active:not([disabled]) {
+  color: var(--HilightText);
+}
+.menu-item.highlight,
+.menu-item.active {
+  background: var(--Hilight);
+  text-shadow: none;
+  outline: 0;
+}
+.menu-item .menu-item-shortcut {
+  padding-left: 10px;
+}
+/* Note: viewBox is needed for scaling the SVG, used in JS Paint's Eye Gaze Mode */
+.menu-item-checkbox-area::after {
+  /* spell-checker: disable */
+  mask-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' style='fill:currentColor;display:inline-block;vertical-align:middle' %3E%3Cpath d='M5 7v3l2 2 5-5V4L7 9Z'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' style='fill:currentColor;display:inline-block;vertical-align:middle' %3E%3Cpath d='M5 7v3l2 2 5-5V4L7 9Z'/%3E%3C/svg%3E");
+  /* spell-checker: enable */
+}
+.menu-item-checkbox-area.radio::after {
+  /* spell-checker: disable */
+  mask-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' style='fill:currentColor;display:inline-block;vertical-align:middle' %3E%3Ccircle cx='8' cy='8' r='3'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' style='fill:currentColor;display:inline-block;vertical-align:middle' %3E%3Ccircle cx='8' cy='8' r='3'/%3E%3C/svg%3E");
+  /* spell-checker: enable */
+}
+.has-submenu .menu-item-submenu-area::after {
+  /* spell-checker: disable */
+  mask-image: url("data:image/svg+xml, %3Csvg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' style='fill:currentColor;display:inline-block;vertical-align:middle' %3E%3Cpath d='m6 4 4 4-4 4z'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml, %3Csvg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' style='fill:currentColor;display:inline-block;vertical-align:middle' %3E%3Cpath d='m6 4 4 4-4 4z'/%3E%3C/svg%3E");
+  /* spell-checker: enable */
+}
+.has-submenu .menu-item-submenu-area.point-right::after {
+  transform: scaleX(-1);
+}
+.menu-item-checkbox-area::after,
+.menu-item-submenu-area::after {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  /* no background means it's invisible by default here (masking transparent gives transparent, i.e. nothing) */
+}
+.menu-item[aria-checked="true"] .menu-item-checkbox-area::after,
+.menu-item.has-submenu .menu-item-submenu-area::after {
+  /* makes it visible */
+  background: currentColor;
+}
+
+.menu-hr {
+  border: 0;
+  border-top: 1px solid var(--ButtonShadow);
+  border-bottom: 1px solid var(--ButtonHilight);
+  margin: 0;
+  margin-top: 3px;
+  margin-bottom: 4px;
+}
+/* @TODO: rename .access-key (could also make it a <u> element, in which case this rule isn't needed) */
+.menu-hotkey {
+  text-decoration: underline;
+}
+.menu-hotkey::selection {
+  /* prevent weird looking white underlines if menubar is contained in a selection, possible in the demo (minute edge case) */
+  text-decoration-color: var(--MenuText) !important;
+}
+
+::selection {
+  background-color: var(--Hilight);
+  color: var(--HilightText);
+}
+
+.scrollbar {
+  @extend %checkerboard;
+}
+.scrollbar-thumb {
+  @extend %outset-deep-2;
+}
+.scrollbar-track-piece:hover:active {
+  @extend %checkerboard;
+  background-color: white;
+  background-blend-mode: difference;
+  /* background-attachment: fixed; breaks the checkered background in chrome */
+}
+.scrollbar-track-piece.increment {
+  background-position: bottom;
+}
+.scrollbar-corner {
+  background-color: var(--ButtonFace);
+}
+
+.scrollbar-button {
+  @extend %outset-deep-2;
+  background-image: var(--scrollbar-arrows-ButtonText);
+  image-rendering: pixelated;
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+  box-sizing: border-box;
+}
+.scrollbar-button:not(.disabled):hover:active {
+  border: 1px solid var(--ButtonShadow);
+  box-shadow: none;
+}
+.scrollbar-button.disabled {
+  background-image:
+    var(--scrollbar-arrows-GrayText), var(--scrollbar-arrows-ButtonHilight);
+}
+
+.scrollbar-button.horizontal.decrement.disabled {
+  background-position: /* left arrow */
+    calc(var(--scrollbar-button-inner-size) * -3 + 1px) 1px,
+    calc(var(--scrollbar-button-inner-size) * -3 + 2px) 2px;
+}
+.scrollbar-button.horizontal.increment.disabled {
+  background-position: /* right arrow */
+    calc(var(--scrollbar-button-inner-size) * -2 + 1px) 1px,
+    calc(var(--scrollbar-button-inner-size) * -2 + 2px) 2px;
+}
+.scrollbar-button.vertical.decrement.disabled {
+  background-position: /* up arrow */
+    calc(var(--scrollbar-button-inner-size) * -1 + 1px) 1px,
+    calc(var(--scrollbar-button-inner-size) * -1 + 2px) 2px;
+}
+.scrollbar-button.vertical.increment.disabled {
+  background-position: /* down arrow */
+    calc(var(--scrollbar-button-inner-size) * -0 + 1px) 1px,
+    calc(var(--scrollbar-button-inner-size) * -0 + 2px) 2px;
+}
+
+.scrollbar-button.horizontal.decrement {
+  background-position: calc(var(--scrollbar-button-inner-size) * -3 + 1px) 1px; /* left */
+}
+.scrollbar-button.horizontal.increment {
+  background-position: calc(var(--scrollbar-button-inner-size) * -2 + 1px) 1px; /* right */
+}
+.scrollbar-button.vertical.decrement {
+  background-position: calc(var(--scrollbar-button-inner-size) * -1 + 1px) 1px; /* up */
+}
+.scrollbar-button.vertical.increment {
+  background-position: calc(var(--scrollbar-button-inner-size) * -0 + 1px) 1px; /* down */
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-button {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+::-webkit-scrollbar {
+  @extend .scrollbar;
+}
+::-webkit-scrollbar-thumb {
+  @extend .scrollbar-thumb;
+}
+::-webkit-scrollbar-corner {
+  @extend .scrollbar-corner;
+}
+
+::-webkit-scrollbar-button {
+  @extend .scrollbar-button;
+}
+::-webkit-scrollbar-button:hover:active {
+  @extend .scrollbar-button:not(.disabled):hover:active;
+}
+::-webkit-scrollbar-button:disabled {
+  @extend .scrollbar-button.disabled;
+}
+
+::-webkit-scrollbar-button:horizontal:decrement:disabled {
+  @extend .scrollbar-button.horizontal.decrement.disabled;
+}
+::-webkit-scrollbar-button:horizontal:increment:disabled {
+  @extend .scrollbar-button.horizontal.increment.disabled;
+}
+::-webkit-scrollbar-button:vertical:decrement:disabled {
+  @extend .scrollbar-button.vertical.decrement.disabled;
+}
+::-webkit-scrollbar-button:vertical:increment:disabled {
+  @extend .scrollbar-button.vertical.increment.disabled;
+}
+
+::-webkit-scrollbar-button:horizontal:decrement {
+  @extend .scrollbar-button.horizontal.decrement;
+}
+::-webkit-scrollbar-button:horizontal:increment {
+  @extend .scrollbar-button.horizontal.increment;
+}
+::-webkit-scrollbar-button:vertical:decrement {
+  @extend .scrollbar-button.vertical.decrement;
+}
+::-webkit-scrollbar-button:vertical:increment {
+  @extend .scrollbar-button.vertical.increment;
+}
+
+::-webkit-scrollbar-track-piece {
+  @extend .scrollbar-track-piece;
+}
+::-webkit-scrollbar-track-piece:increment {
+  @extend .scrollbar-track-piece.increment;
+}
+
+/* turn off double buttons */
+::-webkit-scrollbar-button:start:increment,
+::-webkit-scrollbar-button:end:decrement {
+  display: none;
+}
