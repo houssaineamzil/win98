@@ -177,15 +177,31 @@
 	}
 
 	.pinned {
-		gap: 4px;
+		// gap: 4px;
 		display: flex;
 		padding-inline: 4px;
 
-		.app {
-			width: 25px;
-			height: 25px;
-			margin: 3px 2px;
+		.pinnedApp {
+			width: 24px;
+			height: 24px;
+			padding: 2px;
 			background: no-repeat center / auto 20px;
+			border: none;
+			background-color: transparent;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			&:hover {
+				background-color: #c0c0c0;
+				box-shadow: inset -1px -1px black, inset 1px 1px white, inset -2px -2px grey, inset 2px 2px lightgrey;
+			}
+
+			&:active {
+				background-color: #c0c0c0;
+				box-shadow: inset -1px -1px white, inset 1px 1px black, inset -2px -2px lightgrey, inset 2px 2px grey;
+			}
 		}
 	}
 
