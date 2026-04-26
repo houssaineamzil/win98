@@ -5,6 +5,7 @@ import { useEffect } from "react";
 
 import { Desktop } from "@/components/desktop";
 import { Taskbar } from "@/components/taskbar";
+import { WindowSwitcher } from "@/components/window-switcher";
 import { startTaskbarTimer, stopTaskbarTimer } from "@/stores/taskbar.store";
 
 const preventContextMenu = (event: MouseEvent) => event.preventDefault();
@@ -27,6 +28,7 @@ const Page: NextPage = () => {
     <>
       <Desktop />
       <Taskbar />
+      <WindowSwitcher />
     </>
   );
 };

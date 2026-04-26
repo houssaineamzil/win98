@@ -83,6 +83,15 @@ export interface WindowType {
   minimized: boolean;
   isFullscreen: boolean;
   alwaysOnTop: boolean;
+  zIndex: number;
+  beforeMinimize?: {
+    position: { x: number; y: number };
+    size: { width: number; height: number };
+  };
+  beforeMaximize?: {
+    position: { x: number; y: number };
+    size: { width: number; height: number };
+  };
 }
 
 export interface TaskType {

@@ -44,20 +44,36 @@ export const App: React.FC<{ application: ApplicationType }> = ({
       },
       size: application.size,
       minSize: application.minSize,
+      resizable: application.resizable,
+      active: true,
     });
 
-    useSystem.setState((state) => ({
-      ...state,
-      tasks: {
-        ...state.tasks,
-        [taskID]: {
-          id: taskID,
-          application,
-          window,
-        },
-      },
-      activeTask: taskID,
-    }));
+    useSystem.setState((state) => {
+      const newTasks = { ...state.tasks };
+
+      // Set previous active window to inactive
+      if (state.activeTask && newTasks[state.activeTask]) {
+        newTasks[state.activeTask] = {
+          ...newTasks[state.activeTask],
+          window: {
+            ...newTasks[state.activeTask].window,
+            active: false,
+          },
+        };
+      }
+
+      // Add new window as active
+      newTasks[taskID] = {
+        id: taskID,
+        application,
+        window,
+      };
+
+      return {
+        tasks: newTasks,
+        activeTask: taskID,
+      };
+    });
   };
 
   const focus = () => {

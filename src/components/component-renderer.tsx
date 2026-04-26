@@ -1,11 +1,15 @@
+import { InternetExplorer } from "./apps/internet-explorer";
 import { Notepad } from "./apps/notepad";
 import { ErrorPage } from "./error-page";
 
 // Registry of available components
-const componentRegistry: Record<string, React.FC<{ onClose?: () => void }>> = {
+const componentRegistry: Record<
+  string,
+  React.FC<{ onClose?: () => void; initialUrl?: string }>
+> = {
   Notepad,
+  InternetExplorer,
   // Add actual components here as they are implemented
-  // InternetExplorer: InternetExplorerComponent,
   // JSDos: JSDosComponent,
 };
 
@@ -17,6 +21,7 @@ interface ComponentRendererProps {
 
 export const ComponentRenderer: React.FC<ComponentRendererProps> = ({
   component,
+  data,
   onClose,
 }) => {
   if (!component) {
@@ -29,7 +34,9 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = ({
     return <ErrorPage componentName={component} onClose={onClose} />;
   }
 
-  return <ComponentToRender onClose={onClose} />;
+  return (
+    <ComponentToRender onClose={onClose} initialUrl={data?.src as string} />
+  );
 };
 
 // Helper to check if a component exists

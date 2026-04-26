@@ -82,7 +82,7 @@ const programs: MenuItemData[] = [
     title: "Internet Explorer",
     icon: "msie1-3",
     component: "InternetExplorer",
-    data: { src: "https://www.google.com" },
+    data: { src: "https://web.archive.org/web/1998/https://www.google.com/" },
   },
   {
     title: "JS-DOS Prompt",
@@ -131,7 +131,7 @@ const favorites: MenuItemData[] = [
     title: "My Github",
     type: "ExternalLink",
     icon: "html-0",
-    href: "https://github.com/",
+    href: "https://web.archive.org/web/1998/https://www.github.com/",
   },
 ];
 

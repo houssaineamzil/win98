@@ -2,6 +2,7 @@ import { useCallback, useMemo } from "react";
 import type { RndDragCallback, RndResizeCallback } from "react-rnd";
 import { useSystem } from "@/stores/system.store";
 import type { TaskType } from "@/types";
+import { findTabstops } from "@/utils/window-manager";
 
 interface UseWindowReturn {
   // Window state
@@ -21,8 +22,11 @@ interface UseWindowReturn {
   minimized: boolean;
   isFullscreen: boolean;
   alwaysOnTop: boolean;
+  zIndex: number;
   // Actions
   close: () => void;
+  // Keyboard navigation
+  handleKeyDown: (e: React.KeyboardEvent) => void;
   focus: () => void;
   minimize: () => void;
   unminimize: () => void;
@@ -78,9 +82,9 @@ export const useWindow = (task: TaskType): UseWindowReturn => {
 
   const restore = useCallback(() => {
     if (window.maximized) {
-      restoreTask(task.id, task.application);
+      restoreTask(task.id);
     }
-  }, [restoreTask, task.id, task.application, window.maximized]);
+  }, [restoreTask, task.id, window.maximized]);
 
   const move = useCallback(
     (position: { x: number; y: number }) => {
@@ -125,6 +129,79 @@ export const useWindow = (task: TaskType): UseWindowReturn => {
     [resize, task.application],
   );
 
+  // Keyboard navigation - Tab wrapping and arrow keys
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      // Don't handle if default prevented or modifier keys held
+      if (e.isDefaultPrevented() || e.ctrlKey || e.altKey || e.metaKey) {
+        return;
+      }
+
+      // Handle Tab wrapping
+      if (e.key === "Tab") {
+        const contentEl = e.currentTarget as HTMLElement;
+        const tabstops = findTabstops(contentEl);
+
+        if (tabstops.length === 0) return;
+
+        const focusedIndex = tabstops.indexOf(
+          document.activeElement as Element,
+        );
+
+        if (e.shiftKey) {
+          // Shift+Tab - wrap to last if at first
+          if (focusedIndex === 0) {
+            e.preventDefault();
+            (tabstops[tabstops.length - 1] as HTMLElement).focus();
+          }
+        } else {
+          // Tab - wrap to first if at last
+          if (focusedIndex === tabstops.length - 1) {
+            e.preventDefault();
+            (tabstops[0] as HTMLElement).focus();
+          }
+        }
+        return;
+      }
+
+      // Handle Escape to close
+      if (e.key === "Escape") {
+        close();
+        return;
+      }
+
+      // Handle arrow key navigation between buttons
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        const contentEl = e.currentTarget as HTMLElement;
+        const buttons = Array.from(contentEl.querySelectorAll("button"));
+        const focusedIndex = buttons.indexOf(e.target as HTMLButtonElement);
+
+        if (
+          e.target instanceof HTMLButtonElement &&
+          focusedIndex < buttons.length - 1 &&
+          !e.shiftKey
+        ) {
+          e.preventDefault();
+          buttons[focusedIndex + 1].focus();
+        }
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        const contentEl = e.currentTarget as HTMLElement;
+        const buttons = Array.from(contentEl.querySelectorAll("button"));
+        const focusedIndex = buttons.indexOf(e.target as HTMLButtonElement);
+
+        if (
+          e.target instanceof HTMLButtonElement &&
+          focusedIndex > 0 &&
+          !e.shiftKey
+        ) {
+          e.preventDefault();
+          buttons[focusedIndex - 1].focus();
+        }
+      }
+    },
+    [close],
+  );
+
   return useMemo(
     () => ({
       title: window.title,
@@ -143,6 +220,7 @@ export const useWindow = (task: TaskType): UseWindowReturn => {
       minimized: window.minimized,
       isFullscreen: window.isFullscreen,
       alwaysOnTop: window.alwaysOnTop,
+      zIndex: window.zIndex,
       close,
       focus,
       minimize,
@@ -152,10 +230,10 @@ export const useWindow = (task: TaskType): UseWindowReturn => {
       fullscreen,
       onDrag,
       onResize,
+      handleKeyDown,
     }),
     [
       window,
-      isActive,
       close,
       focus,
       minimize,
@@ -165,6 +243,7 @@ export const useWindow = (task: TaskType): UseWindowReturn => {
       fullscreen,
       onDrag,
       onResize,
+      handleKeyDown,
     ],
   );
 };

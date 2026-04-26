@@ -1,3 +1,5 @@
+import { getNextZIndex } from "./window-manager";
+
 interface Props {
   title?: string;
   icon?: string;
@@ -31,6 +33,15 @@ interface Props {
   minimized?: boolean;
   isFullscreen?: boolean;
   alwaysOnTop?: boolean;
+  zIndex?: number;
+  beforeMinimize?: {
+    position: { x: number; y: number };
+    size: { width: number; height: number };
+  };
+  beforeMaximize?: {
+    position: { x: number; y: number };
+    size: { width: number; height: number };
+  };
 }
 
 export class Window {
@@ -62,6 +73,7 @@ export class Window {
   }: Props) {
     this.title = title;
     this.icon = icon;
+    this.zIndex = getNextZIndex();
 
     this.position = position;
 
@@ -114,4 +126,13 @@ export class Window {
   minimized: boolean;
   isFullscreen: boolean;
   alwaysOnTop: boolean;
+  zIndex: number;
+  beforeMinimize?: {
+    position: { x: number; y: number };
+    size: { width: number; height: number };
+  };
+  beforeMaximize?: {
+    position: { x: number; y: number };
+    size: { width: number; height: number };
+  };
 }

@@ -18,6 +18,96 @@
 		}
 	}
 
+	// React-rnd resize handles - use global since they're added by the library
+	:global(.react-resizable-handle) {
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		background: transparent;
+		z-index: 10;
+	}
+
+	:global(.react-resizable-handle-se) {
+		bottom: 0;
+		right: 0;
+		cursor: se-resize;
+
+		// Windows 98 style resize handle (diagonal lines)
+		&::after {
+			content: "";
+			position: absolute;
+			right: 2px;
+			bottom: 2px;
+			width: 8px;
+			height: 8px;
+			background: linear-gradient(
+				135deg,
+				transparent 40%,
+				gray 40%,
+				gray 45%,
+				transparent 45%,
+				transparent 55%,
+				gray 55%,
+				gray 60%,
+				transparent 60%
+			);
+		}
+	}
+
+	:global(.react-resizable-handle-sw) {
+		bottom: 0;
+		left: 0;
+		cursor: sw-resize;
+	}
+
+	:global(.react-resizable-handle-ne) {
+		top: 0;
+		right: 0;
+		cursor: ne-resize;
+	}
+
+	:global(.react-resizable-handle-nw) {
+		top: 0;
+		left: 0;
+		cursor: nw-resize;
+	}
+
+	:global(.react-resizable-handle-n) {
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 100%;
+		height: 4px;
+		cursor: n-resize;
+	}
+
+	:global(.react-resizable-handle-s) {
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 100%;
+		height: 4px;
+		cursor: s-resize;
+	}
+
+	:global(.react-resizable-handle-e) {
+		top: 50%;
+		right: 0;
+		transform: translateY(-50%);
+		width: 4px;
+		height: 100%;
+		cursor: e-resize;
+	}
+
+	:global(.react-resizable-handle-w) {
+		top: 50%;
+		left: 0;
+		transform: translateY(-50%);
+		width: 4px;
+		height: 100%;
+		cursor: w-resize;
+	}
+
 	.content {
 		flex: 1;
 		display: flex;

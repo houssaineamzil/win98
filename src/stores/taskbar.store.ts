@@ -29,7 +29,7 @@ export const useTaskbar = create<TaskbarState>(() => ({
       name: "Navigator",
       icon: "msie1-4",
       component: "InternetExplorer",
-      data: { src: "https://www.google.com" },
+      data: { src: "https://web.archive.org/web/1998/https://www.google.com/" },
     },
     {
       id: "outlook",
@@ -43,7 +43,7 @@ export const useTaskbar = create<TaskbarState>(() => ({
       name: "Channels",
       icon: "channels-5",
       component: "InternetExplorer",
-      data: { src: "https://www.msn.com" },
+      data: { src: "https://web.archive.org/web/1998/https://www.msn.com/" },
     },
     {
       id: "desktop",

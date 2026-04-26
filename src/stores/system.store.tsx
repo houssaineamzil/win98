@@ -1,5 +1,10 @@
 import { create } from "zustand";
 import type { ApplicationType, TaskType, WindowType } from "@/types";
+import {
+  getNextZIndex,
+  registerWindow,
+  unregisterWindow,
+} from "@/utils/window-manager";
 
 export enum ApplicationsEnum {
   EXPLORER = "Explorer",
@@ -28,7 +33,7 @@ interface SystemActions {
     taskId: string,
     screenSize: { width: number; height: number },
   ) => void;
-  restoreTask: (taskId: string, app: ApplicationType) => void;
+  restoreTask: (taskId: string) => void;
   moveTask: (taskId: string, position: { x: number; y: number }) => void;
   resizeTask: (taskId: string, size: { width: number; height: number }) => void;
   fullscreenTask: (
@@ -56,6 +61,7 @@ export const useSystem = create<SystemState & SystemActions>((set) => ({
 
   // Actions
   addTask: (task) => {
+    registerWindow(task.id, task);
     set((state) => ({
       tasks: { ...state.tasks, [task.id]: task },
       activeTask: task.id,
@@ -63,6 +69,7 @@ export const useSystem = create<SystemState & SystemActions>((set) => ({
   },
 
   removeTask: (taskId) => {
+    unregisterWindow(taskId);
     set((state) => {
       const { [taskId]: _, ...rest } = state.tasks;
       const taskIds = Object.keys(state.tasks);
@@ -87,24 +94,47 @@ export const useSystem = create<SystemState & SystemActions>((set) => ({
       set({ activeTask: null });
       return;
     }
-    set((state) => ({
-      activeTask: taskId,
-      tasks: {
-        ...state.tasks,
-        [taskId]: {
-          ...state.tasks[taskId],
+    const newZIndex = getNextZIndex();
+    set((state) => {
+      const previousActiveId = state.activeTask;
+      const newTasks = { ...state.tasks };
+
+      // Set previous active window to inactive
+      if (
+        previousActiveId &&
+        previousActiveId !== taskId &&
+        newTasks[previousActiveId]
+      ) {
+        newTasks[previousActiveId] = {
+          ...newTasks[previousActiveId],
           window: {
-            ...state.tasks[taskId].window,
-            active: true,
-            minimized: false,
+            ...newTasks[previousActiveId].window,
+            active: false,
           },
+        };
+      }
+
+      // Set new window to active
+      newTasks[taskId] = {
+        ...newTasks[taskId],
+        window: {
+          ...newTasks[taskId].window,
+          active: true,
+          minimized: false,
+          zIndex: newZIndex,
         },
-      },
-    }));
+      };
+
+      return {
+        activeTask: taskId,
+        tasks: newTasks,
+      };
+    });
   },
 
   minimizeTask: (taskId) => {
     set((state) => {
+      const task = state.tasks[taskId];
       const taskIds = Object.keys(state.tasks);
       const minimizedIndex = taskIds.indexOf(taskId);
       const newActiveTask =
@@ -122,9 +152,13 @@ export const useSystem = create<SystemState & SystemActions>((set) => ({
           [taskId]: {
             ...state.tasks[taskId],
             window: {
-              ...state.tasks[taskId].window,
+              ...task.window,
               active: false,
               minimized: true,
+              beforeMinimize: {
+                position: { ...task.window.position },
+                size: { ...task.window.size },
+              },
             },
           },
         },
@@ -150,37 +184,49 @@ export const useSystem = create<SystemState & SystemActions>((set) => ({
   },
 
   maximizeTask: (taskId, screenSize) => {
-    set((state) => ({
-      tasks: {
-        ...state.tasks,
-        [taskId]: {
-          ...state.tasks[taskId],
-          window: {
-            ...state.tasks[taskId].window,
-            maximized: true,
-            size: { width: screenSize.width, height: screenSize.height - 38 },
-            position: { x: 0, y: 0 },
+    set((state) => {
+      const task = state.tasks[taskId];
+      return {
+        tasks: {
+          ...state.tasks,
+          [taskId]: {
+            ...state.tasks[taskId],
+            window: {
+              ...task.window,
+              maximized: true,
+              size: { width: screenSize.width, height: screenSize.height - 38 },
+              position: { x: 0, y: 0 },
+              beforeMaximize: {
+                position: { ...task.window.position },
+                size: { ...task.window.size },
+              },
+            },
           },
         },
-      },
-    }));
+      };
+    });
   },
 
-  restoreTask: (taskId, app) => {
-    set((state) => ({
-      tasks: {
-        ...state.tasks,
-        [taskId]: {
-          ...state.tasks[taskId],
-          window: {
-            ...state.tasks[taskId].window,
-            maximized: false,
-            size: app.size,
-            position: app.position,
+  restoreTask: (taskId) => {
+    set((state) => {
+      const task = state.tasks[taskId];
+      const beforeMaximize = task.window.beforeMaximize;
+      return {
+        tasks: {
+          ...state.tasks,
+          [taskId]: {
+            ...state.tasks[taskId],
+            window: {
+              ...task.window,
+              maximized: false,
+              size: beforeMaximize?.size ?? task.window.size,
+              position: beforeMaximize?.position ?? task.window.position,
+              beforeMaximize: undefined,
+            },
           },
         },
-      },
-    }));
+      };
+    });
   },
 
   moveTask: (taskId, position) => {

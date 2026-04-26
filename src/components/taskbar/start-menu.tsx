@@ -73,14 +73,35 @@ const MenuItemComponent: React.FC<MenuItemProps> = ({
         position: app.position,
         size: app.size,
         minSize: app.minSize,
+        resizable: app.resizable,
+        active: true,
       });
-      useSystem.setState((state) => ({
-        tasks: {
-          ...state.tasks,
-          [taskID]: { id: taskID, application: app, window: windowInstance },
-        },
-        activeTask: taskID,
-      }));
+      useSystem.setState((state) => {
+        const newTasks = { ...state.tasks };
+
+        // Set previous active window to inactive
+        if (state.activeTask && newTasks[state.activeTask]) {
+          newTasks[state.activeTask] = {
+            ...newTasks[state.activeTask],
+            window: {
+              ...newTasks[state.activeTask].window,
+              active: false,
+            },
+          };
+        }
+
+        // Add new window as active
+        newTasks[taskID] = {
+          id: taskID,
+          application: app,
+          window: windowInstance,
+        };
+
+        return {
+          tasks: newTasks,
+          activeTask: taskID,
+        };
+      });
       closeParent?.();
     } else if (item.component) {
       // Open component-based app with data (e.g., Internet Explorer with URL)
@@ -91,6 +112,8 @@ const MenuItemComponent: React.FC<MenuItemProps> = ({
         position: { x: 100 + Math.random() * 50, y: 100 + Math.random() * 50 },
         size: { width: 800, height: 600 },
         minSize: { width: 400, height: 300 },
+        resizable: true,
+        active: true,
       });
       // Store component info in window for the system to render
       (
@@ -105,29 +128,44 @@ const MenuItemComponent: React.FC<MenuItemProps> = ({
           componentData?: Record<string, unknown>;
         }
       ).componentData = item.data;
-      useSystem.setState((state) => ({
-        tasks: {
-          ...state.tasks,
-          [taskID]: {
-            id: taskID,
-            application: {
-              name: item.title,
-              icon: item.icon,
-              description: "",
-              version: "",
-              resizable: true,
-              component: item.component,
-              data: item.data,
-              position: windowInstance.position,
-              size: windowInstance.size,
-              minSize: windowInstance.minSize,
-              content: null,
-            } as unknown as ApplicationType,
-            window: windowInstance,
-          },
-        },
-        activeTask: taskID,
-      }));
+      useSystem.setState((state) => {
+        const newTasks = { ...state.tasks };
+
+        // Set previous active window to inactive
+        if (state.activeTask && newTasks[state.activeTask]) {
+          newTasks[state.activeTask] = {
+            ...newTasks[state.activeTask],
+            window: {
+              ...newTasks[state.activeTask].window,
+              active: false,
+            },
+          };
+        }
+
+        // Add new window as active
+        newTasks[taskID] = {
+          id: taskID,
+          application: {
+            name: item.title,
+            icon: item.icon,
+            description: "",
+            version: "",
+            resizable: true,
+            component: item.component,
+            data: item.data,
+            position: windowInstance.position,
+            size: windowInstance.size,
+            minSize: windowInstance.minSize,
+            content: null,
+          } as unknown as ApplicationType,
+          window: windowInstance,
+        };
+
+        return {
+          tasks: newTasks,
+          activeTask: taskID,
+        };
+      });
       closeParent?.();
     } else if (item.isShutdown) {
       useSystem.setState((state) => ({
@@ -301,20 +339,36 @@ export const StartMenu: React.FC<StartMenuProps> = ({ isOpen, onClose }) => {
         },
         size: application.size,
         minSize: application.minSize,
+        resizable: application.resizable,
+        active: true,
       });
 
-      useSystem.setState((state) => ({
-        ...state,
-        tasks: {
-          ...state.tasks,
-          [taskID]: {
-            id: taskID,
-            application,
-            window,
-          },
-        },
-        activeTask: taskID,
-      }));
+      useSystem.setState((state) => {
+        const newTasks = { ...state.tasks };
+
+        // Set previous active window to inactive
+        if (state.activeTask && newTasks[state.activeTask]) {
+          newTasks[state.activeTask] = {
+            ...newTasks[state.activeTask],
+            window: {
+              ...newTasks[state.activeTask].window,
+              active: false,
+            },
+          };
+        }
+
+        // Add new window as active
+        newTasks[taskID] = {
+          id: taskID,
+          application,
+          window,
+        };
+
+        return {
+          tasks: newTasks,
+          activeTask: taskID,
+        };
+      });
 
       onClose();
     },

@@ -30,6 +30,7 @@ export const Pinned: React.FC = () => {
       position: { x: 100 + Math.random() * 50, y: 100 + Math.random() * 50 },
       size: { width: 800, height: 600 },
       minSize: { width: 400, height: 300 },
+      resizable: true,
     });
 
     // For component-based apps (InternetExplorer, etc.)
